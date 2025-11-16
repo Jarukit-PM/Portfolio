@@ -1,0 +1,6 @@
+{
+  "frontend": ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+  "backend": ["Node.js", "Python"],
+  "tools": ["Git", "VS Code"]
+}
+
