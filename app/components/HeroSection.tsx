@@ -56,7 +56,7 @@ export function HeroSection() {
   const name = "Jarukit Pan-Iam";
 
   return (
-    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-3xl border border-zinc-800/40 bg-gradient-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 shadow-[0_0_60px_rgba(0,0,0,0.7)] sm:px-10 lg:px-16">
+    <section id="about" className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-3xl border border-zinc-800/40 bg-gradient-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 shadow-[0_0_60px_rgba(0,0,0,0.7)] sm:px-10 lg:px-16">
       {/* background glow */}
       <motion.div
         className="pointer-events-none absolute -top-40 right-[-10%] h-72 w-72 rounded-full bg-red-500/25 blur-3xl"
@@ -155,7 +155,7 @@ export function HeroSection() {
                 <FiLinkedin />
               </Link>
               <Link
-                href="https://github.com"
+                href="https://github.com/Jarukit-PM"
                 target="_blank"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-lg text-zinc-100 transition hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-50"
               >
@@ -237,7 +237,7 @@ export function HeroSection() {
                 <div className="flex items-center justify-between gap-3">
                   <div className="space-y-1">
                     <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
-                      Current Focus
+                      Recent Experience
                     </p>
                     <p className="text-sm font-semibold text-zinc-50">
                       Frontend &amp; Fullstack Experiences
@@ -250,7 +250,7 @@ export function HeroSection() {
 
                 <div className="space-y-3">
                   <p className="text-xs text-zinc-300/90">
-                    Internship @ IRPC Public Company Limited. Developed internal
+                    2-month Internship @ IRPC Public Company Limited. Developed internal
                     web apps, CI/CD pipelines, and database solutions that help
                     real teams work more efficiently.
                   </p>

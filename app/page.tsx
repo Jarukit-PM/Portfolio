@@ -8,16 +8,19 @@ export default function Home() {
             Jarukit Pan-Iam
           </div>
           <nav className="hidden gap-4 text-xs font-medium text-zinc-400 sm:flex">
-            <a href="#skills" className="hover:text-zinc-100">
+            <a href="#about" className="hover:text-zinc-100 transition-colors">
+              About Me
+            </a>
+            <a href="#skills" className="hover:text-zinc-100 transition-colors">
               Skills
             </a>
-            <a href="#experience" className="hover:text-zinc-100">
+            <a href="#experience" className="hover:text-zinc-100 transition-colors">
               Experience
             </a>
-            <a href="#education" className="hover:text-zinc-100">
+            <a href="#education" className="hover:text-zinc-100 transition-colors">
               Education
             </a>
-            <a href="#contact" className="hover:text-zinc-100">
+            <a href="#contact" className="hover:text-zinc-100 transition-colors">
               Contact
             </a>
           </nav>

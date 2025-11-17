@@ -1,27 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
+import {
+  SiAngular,
+  SiDotnet,
+  SiJenkins,
+  SiGithub,
+} from "react-icons/si";
+import { HiCodeBracket, HiServer } from "react-icons/hi2";
 
-const sectionVariants = {
+const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: (index: number) => ({
     opacity: 1,
     y: 0,
     transition: {
       delay: 0.1 + index * 0.08,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 80,
       damping: 16,
     },
   }),
 };
 
+const skillIcons: Record<string, React.ReactNode> = {
+  "Full-Stack Development": <HiCodeBracket />,
+  "Microsoft SQL Server": <HiServer />,
+  "CI/CD": <SiGithub />,
+  Jenkins: <SiJenkins />,
+  Angular: <SiAngular />,
+  ".NET": <SiDotnet />,
+};
+
+const skillColors: Record<string, string> = {
+  "Full-Stack Development": "text-cyan-300",
+  "Microsoft SQL Server": "text-red-400",
+  "CI/CD": "text-fuchsia-300",
+  Jenkins: "text-yellow-300",
+  Angular: "text-red-400",
+  ".NET": "text-indigo-300",
+};
+
 const experiences = [
   {
     role: "Full Stack Developer",
     company: "IRPC Public Company Limited",
+    companyLogo: "/images/logos/IRPC_Logo.png",
     type: "Internship",
-    period: "Jun 2025 – Aug 2025 · 3 mos",
+    period: "Jun 2025 – Aug 2025 · 2 mos",
     location: "Rayong, Thailand · On-site",
     bullets: [
       "Developed an internal web application using Angular and .NET, improving workflow efficiency across teams.",
@@ -69,13 +96,26 @@ export function ExperienceSection() {
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-zinc-600/70 to-transparent" />
 
             <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <h3 className="text-sm font-semibold text-zinc-50 sm:text-base">
-                  {exp.role}
-                </h3>
-                <p className="text-xs font-medium text-zinc-300 sm:text-sm">
-                  {exp.company} · {exp.type}
-                </p>
+              <div className="flex items-start gap-3">
+                {exp.companyLogo && (
+                  <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">
+                    <Image
+                      src={exp.companyLogo}
+                      alt={`${exp.company} logo`}
+                      fill
+                      className="object-contain"
+                      sizes="96px"
+                    />
+                  </div>
+                )}
+                <div>
+                  <h3 className="text-sm font-semibold text-zinc-50 sm:text-base">
+                    {exp.role}
+                  </h3>
+                  <p className="text-xs font-medium text-zinc-300 sm:text-sm">
+                    {exp.company} · {exp.type}
+                  </p>
+                </div>
               </div>
               <div className="text-right text-[11px] text-zinc-400 sm:text-xs">
                 <p>{exp.period}</p>
@@ -93,14 +133,20 @@ export function ExperienceSection() {
             </ul>
 
             <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-zinc-300 sm:text-xs">
-              {exp.skills.split("·").map((skill) => (
-                <span
-                  key={skill.trim()}
-                  className="rounded-full border border-zinc-700/80 bg-zinc-900/80 px-2.5 py-1"
-                >
-                  {skill.trim()}
-                </span>
-              ))}
+              {exp.skills.split("·").map((skill) => {
+                const skillName = skill.trim();
+                const icon = skillIcons[skillName];
+                const color = skillColors[skillName] || "text-zinc-300";
+                return (
+                  <span
+                    key={skillName}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700/80 bg-zinc-900/80 px-2.5 py-1 text-zinc-100 shadow-[0_0_22px_rgba(0,0,0,0.9)]"
+                  >
+                    {icon && <span className={`text-sm ${color}`}>{icon}</span>}
+                    <span>{skillName}</span>
+                  </span>
+                );
+              })}
             </div>
           </motion.article>
         ))}

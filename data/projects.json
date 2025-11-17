@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "title": "Awesome Portfolio",
+    "title": "My Portfolio",
     "description": "A highly animated portfolio website built with Next.js, Framer Motion, and Three.js to showcase my work and experience.",
     "tags": ["React", "Next.js"],
-    "link": "https://example.com",
-    "github": "https://github.com"
+    "link": "https://jarukit-pm.github.io/portfolio/",
+    "github": "https://github.com/Jarukit-PM/portfolio"
   }
 ]
 

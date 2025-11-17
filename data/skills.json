@@ -1,6 +1,23 @@
 {
-  "frontend": ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-  "backend": ["Node.js", "Python"],
-  "tools": ["Git", "VS Code"]
+  "frontend": [
+    "React",
+    "React Native",
+    "Next.js",
+    "JavaScript",
+    "TypeScript",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Three.js",
+    "React Three Fiber",
+    "Angular"
+  ],
+  "backend": [".NET", "Node.js", "REST APIs", "Go", "Express", "C", "C++"],
+  "database": [
+    "Microsoft SQL Server",
+    "MongoDB",
+    "Firebase",
+    "PostgreSQL"
+  ],
+  "tooling": ["Git", "GitHub Desktop", "Jenkins", "CI/CD", "Docker", "VS Code"]
 }
 

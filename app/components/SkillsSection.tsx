@@ -2,8 +2,11 @@
 
 import type { ReactNode } from "react";
 import { motion, type Variants } from "framer-motion";
+import skillsData from "@/data/skills.json";
 import {
   SiAngular,
+  SiC,
+  SiCplusplus,
   SiDocker,
   SiDotnet,
   SiExpress,
@@ -11,6 +14,7 @@ import {
   SiFramer,
   SiGithub,
   SiGo,
+  SiJavascript,
   SiJenkins,
   SiMongodb,
   SiNextdotjs,
@@ -55,6 +59,7 @@ const skillIcons: Record<string, ReactNode> = {
   React: <SiReact />,
   "React Native": <SiReact />,
   "Next.js": <SiNextdotjs />,
+  JavaScript: <SiJavascript />,
   TypeScript: <SiTypescript />,
   "Tailwind CSS": <SiTailwindcss />,
   "Framer Motion": <SiFramer />,
@@ -62,6 +67,8 @@ const skillIcons: Record<string, ReactNode> = {
   "React Three Fiber": <SiReactquery />,
   Angular: <SiAngular />,
   ".NET": <SiDotnet />,
+  C: <SiC />,
+  "C++": <SiCplusplus />,
   "Node.js": <SiNodedotjs />,
   "REST APIs": <SiNodedotjs />,
   Go: <SiGo />,
@@ -80,6 +87,7 @@ const skillColors: Record<string, string> = {
   React: "text-sky-400",
   "React Native": "text-sky-400",
   "Next.js": "text-zinc-100",
+  JavaScript: "text-yellow-300",
   TypeScript: "text-sky-300",
   "Tailwind CSS": "text-teal-300",
   "Framer Motion": "text-pink-300",
@@ -87,6 +95,8 @@ const skillColors: Record<string, string> = {
   "React Three Fiber": "text-emerald-200",
   Angular: "text-red-400",
   ".NET": "text-indigo-300",
+  C: "text-blue-300",
+  "C++": "text-blue-400",
   "Node.js": "text-lime-300",
   "REST APIs": "text-lime-300",
   Go: "text-cyan-300",
@@ -101,34 +111,12 @@ const skillColors: Record<string, string> = {
   Docker: "text-sky-400",
 };
 
-const skills = {
-  frontend: [
-    "React",
-    "React Native",
-    "Next.js",
-    "TypeScript",
-    "Tailwind CSS",
-    "Framer Motion",
-    "Three.js",
-    "React Three Fiber",
-    "Angular",
-  ],
-  backend: [".NET", "Node.js", "REST APIs", "Go", "Express"],
-  database: [
-    "Microsoft SQL Server",
-    "MongoDB",
-    "Firebase",
-    "PostgreSQL",
-  ],
-  tooling: ["Git", "GitHub Desktop", "Jenkins", "CI/CD", "Docker", "VS Code"],
-};
-
 export function SkillsSection() {
   const groups = [
-    { label: "Frontend", items: skills.frontend },
-    { label: "Backend", items: skills.backend },
-    { label: "Database", items: skills.database },
-    { label: "Tooling", items: skills.tooling },
+    { label: "Frontend", items: skillsData.frontend },
+    { label: "Backend", items: skillsData.backend },
+    { label: "Database", items: skillsData.database },
+    { label: "Tooling", items: skillsData.tooling },
   ];
 
   return (

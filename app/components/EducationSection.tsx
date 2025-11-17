@@ -1,19 +1,36 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
+import { HiCodeBracket, HiLightBulb } from "react-icons/hi2";
+import { FaRocket, FaGraduationCap } from "react-icons/fa";
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
       delay: 0.1 + i * 0.06,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 90,
       damping: 16,
     },
   }),
+};
+
+const tagIcons: Record<string, React.ReactNode> = {
+  Entrepreneurship: <FaRocket />,
+  "Innovation Management": <HiLightBulb />,
+  "Software Development": <HiCodeBracket />,
+  "Web Development": <HiCodeBracket />,
+};
+
+const tagColors: Record<string, string> = {
+  Entrepreneurship: "text-orange-300",
+  "Innovation Management": "text-yellow-300",
+  "Software Development": "text-blue-400",
+  "Web Development": "text-cyan-300",
 };
 
 const education = [
@@ -21,6 +38,7 @@ const education = [
     degree: "Master of Business Administration (MBA)",
     field: "Entrepreneurship / Entrepreneurial Studies",
     school: "King Mongkut's University of Technology Thonburi",
+    schoolLogo: "/images/logos/KMUTT_Logo.png",
     period: "Aug 2024 – May 2027",
     tags: ["Entrepreneurship", "Innovation Management"],
   },
@@ -28,6 +46,7 @@ const education = [
     degree: "Bachelor of Engineering (BE)",
     field: "Computer Engineering",
     school: "King Mongkut's University of Technology Thonburi",
+    schoolLogo: "/images/logos/KMUTT_Logo.png",
     period: "Aug 2022 – May 2026",
     tags: ["Software Development", "Web Development"],
   },
@@ -62,24 +81,44 @@ export function EducationSection() {
             custom={index}
           >
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-emerald-400/60 to-transparent" />
-            <h3 className="text-sm font-semibold text-zinc-50 sm:text-base">
-              {item.degree}
-            </h3>
-            <p className="text-xs font-medium text-zinc-300 sm:text-sm">
-              {item.field}
-            </p>
-            <p className="mt-1 text-xs text-zinc-400">{item.school}</p>
-            <p className="mt-1 text-xs text-zinc-500">{item.period}</p>
+            <div className="flex items-start gap-3">
+              {item.schoolLogo && (
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">
+                  <Image
+                    src={item.schoolLogo}
+                    alt={`${item.school} logo`}
+                    fill
+                    className="object-contain"
+                    sizes="80px"
+                  />
+                </div>
+              )}
+              <div className="flex-1">
+                <h3 className="text-sm font-semibold text-zinc-50 sm:text-base">
+                  {item.degree}
+                </h3>
+                <p className="text-xs font-medium text-zinc-300 sm:text-sm">
+                  {item.field}
+                </p>
+                <p className="mt-1 text-xs text-zinc-400">{item.school}</p>
+                <p className="mt-1 text-xs text-zinc-500">{item.period}</p>
+              </div>
+            </div>
 
             <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-zinc-300 sm:text-xs">
-              {item.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-zinc-700/80 bg-zinc-900/80 px-2.5 py-1"
-                >
-                  {tag}
-                </span>
-              ))}
+              {item.tags.map((tag) => {
+                const icon = tagIcons[tag];
+                const color = tagColors[tag] || "text-zinc-300";
+                return (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700/80 bg-zinc-900/80 px-2.5 py-1 text-zinc-100 shadow-[0_0_22px_rgba(0,0,0,0.9)]"
+                  >
+                    {icon && <span className={`text-sm ${color}`}>{icon}</span>}
+                    <span>{tag}</span>
+                  </span>
+                );
+              })}
             </div>
           </motion.article>
         ))}
