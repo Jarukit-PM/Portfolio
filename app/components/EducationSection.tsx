@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
+import { getImagePath } from "@/app/lib/utils";
 import { HiCodeBracket, HiLightBulb } from "react-icons/hi2";
 import { FaRocket, FaGraduationCap } from "react-icons/fa";
 
@@ -85,7 +86,7 @@ export function EducationSection() {
               {item.schoolLogo && (
                 <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">
                   <Image
-                    src={item.schoolLogo}
+                    src={getImagePath(item.schoolLogo)}
                     alt={`${item.school} logo`}
                     fill
                     className="object-contain"

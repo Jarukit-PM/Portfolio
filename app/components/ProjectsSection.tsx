@@ -33,6 +33,7 @@ import {
   SiExpress,
 } from "react-icons/si";
 import projects from "@/data/projects.json";
+import { getImagePath } from "@/app/lib/utils";
 
 type Project = {
   id: number;
@@ -107,7 +108,7 @@ export function ProjectsSection() {
     ...p,
     github: p.github ?? "https://github.com", // placeholder – replace with real repo per project
   }));
-  const DEFAULT_IMAGE = "/github-cover.svg";
+  const DEFAULT_IMAGE = getImagePath("/github-cover.svg");
 
   // Duplicate projects for infinite scroll (only if we have multiple projects)
   const duplicatedProjects = list.length > 1 ? [...list, ...list, ...list] : list;
@@ -277,7 +278,7 @@ export function ProjectsSection() {
             const imageSrc =
               imageErrors[project.id] || !project.image
                 ? DEFAULT_IMAGE
-                : project.image;
+                : getImagePath(project.image);
             return (
             <div
               key={`${project.id}-${index}`}

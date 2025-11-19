@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
+import { getImagePath } from "@/app/lib/utils";
 import {
   SiAngular,
   SiDotnet,
@@ -100,7 +101,7 @@ export function ExperienceSection() {
                 {exp.companyLogo && (
                   <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">
                     <Image
-                      src={exp.companyLogo}
+                      src={getImagePath(exp.companyLogo)}
                       alt={`${exp.company} logo`}
                       fill
                       className="object-contain"

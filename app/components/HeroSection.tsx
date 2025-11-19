@@ -13,6 +13,7 @@ import {
 } from "react-icons/fi";
 import { SiNextdotjs, SiTypescript, SiFramer } from "react-icons/si";
 import Link from "next/link";
+import { getImagePath } from "@/app/lib/utils";
 
 const container: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -146,7 +147,7 @@ export function HeroSection() {
             className="flex flex-wrap items-center gap-4 pt-4"
           >
             <Link
-              href="/resume/jarukit-pan-iam-resume.pdf"
+              href={getImagePath("/resume/jarukit-pan-iam-resume.pdf")}
               className="group inline-flex items-center gap-2 rounded-full bg-zinc-50 px-6 py-3 text-sm font-semibold text-zinc-900 shadow-lg shadow-red-500/30 transition hover:bg-red-500 hover:text-zinc-50"
             >
               <FiDownload className="h-4 w-4 transition group-hover:-translate-y-0.5" />
