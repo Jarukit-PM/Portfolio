@@ -108,7 +108,7 @@ export function ProjectsSection() {
     ...p,
     github: p.github ?? "https://github.com", // placeholder – replace with real repo per project
   }));
-  const DEFAULT_IMAGE = getImagePath("/github-cover.svg");
+  const DEFAULT_IMAGE = getImagePath("/github-cover.svg"); // Will be computed on each render to get current basePath
 
   // Duplicate projects for infinite scroll (only if we have multiple projects)
   const duplicatedProjects = list.length > 1 ? [...list, ...list, ...list] : list;

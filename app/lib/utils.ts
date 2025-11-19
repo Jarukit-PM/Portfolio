@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Get the base path for GitHub Pages deployment
  * This should match the logic in next.config.ts
- * For static export, we detect it from the current pathname at runtime
+ * For static export, we detect it from the current URL at runtime
  */
 export function getBasePath(): string {
   // Only run on client-side
@@ -16,30 +16,43 @@ export function getBasePath(): string {
     return "";
   }
   
-  // Client-side: detect from current pathname
+  const hostname = window.location.hostname;
   const pathname = window.location.pathname;
   
-  // For GitHub Pages, the pathname will be like /repository-name/...
-  // Extract the first segment if it exists and is not empty
-  const pathSegments = pathname.split("/").filter(Boolean);
-  
-  // If we're on github.io and have a path segment, use it as basePath
-  if (window.location.hostname.includes("github.io") && pathSegments.length > 0) {
-    // Check if the first segment looks like a repository name (not a page route)
-    const firstSegment = pathSegments[0];
-    // Common page routes to exclude
-    const pageRoutes = ["index.html", "404.html", "_next"];
-    if (!pageRoutes.includes(firstSegment)) {
-      return `/${firstSegment}`;
+  // For GitHub Pages (github.io domain)
+  if (hostname.includes("github.io")) {
+    // Extract repository name from pathname: /repository-name/...
+    const pathSegments = pathname.split("/").filter(Boolean);
+    
+    // If pathname has segments and first one is not a page route, use it
+    if (pathSegments.length > 0) {
+      const firstSegment = pathSegments[0];
+      const pageRoutes = ["index.html", "404.html", "_next", "404"];
+      if (!pageRoutes.includes(firstSegment) && !firstSegment.includes(".")) {
+        return `/${firstSegment}`;
+      }
     }
+    
+    // If we're at root or index, try to detect from the HTML base tag or use common pattern
+    // Check if we can find a base tag in the document
+    const baseTag = document.querySelector("base");
+    if (baseTag && baseTag.getAttribute("href")) {
+      const baseHref = baseTag.getAttribute("href") || "";
+      if (baseHref && baseHref !== "/") {
+        return baseHref.endsWith("/") ? baseHref.slice(0, -1) : baseHref;
+      }
+    }
+    
+    // Last resort: check common repository names or use portfolio as default
+    // This is a fallback - ideally the pathname should have the repo name
+    return "/portfolio";
   }
   
-  // Fallback: check if we're in a subdirectory (for local development with basePath)
-  // This handles the case where basePath is set in next.config.ts
+  // For local development, check pathname
+  const pathSegments = pathname.split("/").filter(Boolean);
   if (pathSegments.length > 0) {
     const firstSegment = pathSegments[0];
-    // If the first segment matches common repo name patterns, use it
-    if (firstSegment && firstSegment !== "index.html") {
+    if (firstSegment && firstSegment !== "index.html" && !firstSegment.startsWith("_") && !firstSegment.includes(".")) {
       return `/${firstSegment}`;
     }
   }
@@ -53,10 +66,22 @@ export function getBasePath(): string {
  * @returns Full path with basePath if needed
  */
 export function getImagePath(imagePath: string): string {
+  // Only process on client-side
+  if (typeof window === "undefined") {
+    return imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+  }
+  
   const basePath = getBasePath();
   // Ensure imagePath starts with /
   const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
-  // Combine basePath and imagePath, avoiding double slashes
-  return basePath ? `${basePath}${cleanPath}` : cleanPath;
+  
+  // If we have a basePath, prepend it
+  if (basePath) {
+    // Remove trailing slash from basePath if present, and ensure cleanPath doesn't have leading issues
+    const normalizedBasePath = basePath.endsWith("/") ? basePath.slice(0, -1) : basePath;
+    return `${normalizedBasePath}${cleanPath}`;
+  }
+  
+  return cleanPath;
 }
 

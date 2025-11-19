@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
+import { useState, useCallback } from "react";
 import { getImagePath } from "@/app/lib/utils";
 import { HiCodeBracket, HiLightBulb } from "react-icons/hi2";
 import { FaRocket, FaGraduationCap } from "react-icons/fa";
@@ -54,6 +55,16 @@ const education = [
 ];
 
 export function EducationSection() {
+  const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});
+  const DEFAULT_LOGO = getImagePath("/github-cover.svg");
+
+  const handleLogoError = useCallback((key: string) => {
+    setLogoErrors((prev) => {
+      if (prev[key]) return prev;
+      return { ...prev, [key]: true };
+    });
+  }, []);
+
   return (
     <section
       id="education"
@@ -86,12 +97,13 @@ export function EducationSection() {
               {item.schoolLogo && (
                 <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">
                   <Image
-                    src={getImagePath(item.schoolLogo)}
+                    src={logoErrors[item.school] || !item.schoolLogo ? DEFAULT_LOGO : getImagePath(item.schoolLogo)}
                     alt={`${item.school} logo`}
                     fill
                     className="object-contain"
                     sizes="80px"
                     unoptimized
+                    onError={() => handleLogoError(item.school)}
                   />
                 </div>
               )}

@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
+import { useState, useCallback } from "react";
 import { getImagePath } from "@/app/lib/utils";
 import {
   SiAngular,
@@ -64,6 +65,16 @@ const experiences = [
 ];
 
 export function ExperienceSection() {
+  const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});
+  const DEFAULT_LOGO = getImagePath("/github-cover.svg");
+
+  const handleLogoError = useCallback((key: string) => {
+    setLogoErrors((prev) => {
+      if (prev[key]) return prev;
+      return { ...prev, [key]: true };
+    });
+  }, []);
+
   return (
     <section
       id="experience"
@@ -101,12 +112,13 @@ export function ExperienceSection() {
                 {exp.companyLogo && (
                   <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">
                     <Image
-                      src={getImagePath(exp.companyLogo)}
+                      src={logoErrors[exp.company] || !exp.companyLogo ? DEFAULT_LOGO : getImagePath(exp.companyLogo)}
                       alt={`${exp.company} logo`}
                       fill
                       className="object-contain"
                       sizes="96px"
                       unoptimized
+                      onError={() => handleLogoError(exp.company)}
                     />
                   </div>
                 )}
