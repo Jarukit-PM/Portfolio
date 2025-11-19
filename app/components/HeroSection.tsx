@@ -1,7 +1,16 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { FiDownload, FiLinkedin, FiGithub } from "react-icons/fi";
+import {
+  FiDownload,
+  FiLinkedin,
+  FiGithub,
+  FiExternalLink,
+  FiCode,
+  FiDatabase,
+  FiTool,
+  FiZap,
+} from "react-icons/fi";
 import Link from "next/link";
 
 const container: Variants = {
@@ -56,7 +65,7 @@ export function HeroSection() {
   const name = "Jarukit Pan-Iam";
 
   return (
-    <section id="about" className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-3xl border border-zinc-800/40 bg-gradient-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 shadow-[0_0_60px_rgba(0,0,0,0.7)] sm:px-10 lg:px-16">
+    <section id="about" className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-3xl border border-zinc-800/40 bg-linear-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 shadow-[0_0_60px_rgba(0,0,0,0.7)] sm:px-10 lg:px-16">
       {/* background glow */}
       <motion.div
         className="pointer-events-none absolute -top-40 right-[-10%] h-72 w-72 rounded-full bg-red-500/25 blur-3xl"
@@ -101,7 +110,7 @@ export function HeroSection() {
               <span className="block text-zinc-400 text-base sm:text-lg">
                 Hi, I&apos;m
               </span>
-              <span className="bg-gradient-to-r from-zinc-50 via-red-200 to-red-500 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-zinc-50 via-red-200 to-red-500 bg-clip-text text-transparent">
                 {name}
               </span>
             </motion.h1>
@@ -165,9 +174,9 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Right side: animated card / placeholder for future 3D */}
+        {/* Right side: twin highlight cards */}
         <motion.div
-          className="relative h-64 w-full max-w-md justify-self-center lg:h-72"
+          className="grid w-full gap-5 justify-self-center sm:grid-cols-2 lg:max-w-4xl"
           initial={{ opacity: 0, x: 40, rotateX: -10 }}
           animate={{
             opacity: 1,
@@ -182,92 +191,149 @@ export function HeroSection() {
           }}
         >
           <motion.div
-            className="absolute inset-0 rounded-3xl border border-white/10 bg-gradient-to-br from-black via-zinc-900 to-zinc-950 p-[1px] shadow-[0_24px_80px_rgba(0,0,0,0.9)]"
-            style={{ perspective: 1200 }}
+            className="relative flex h-72 flex-col overflow-hidden rounded-[1.6rem] border border-white/12 bg-[radial-gradient(circle_at_top,#ef4444_0,#020617_45%,#000_70%)] shadow-[0_24px_80px_rgba(0,0,0,0.9)]"
             animate={{
-              boxShadow: [
-                "0 24px 80px rgba(0,0,0,0.5)",
-                "0 24px 120px rgba(239,68,68,0.7)",
-                "0 24px 80px rgba(0,0,0,0.5)",
-              ],
+              backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
             }}
             transition={{
-              duration: 6,
+              duration: 14,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: "linear",
             }}
           >
             <motion.div
-              className="relative h-full w-full overflow-hidden rounded-[1.4rem] bg-[radial-gradient(circle_at_top,#ef4444_0,#020617_45%,#000_70%)]"
+              className="absolute -left-10 top-10 h-40 w-40 rounded-full bg-red-500/40 blur-3xl"
               animate={{
-                backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+                x: [0, 40, -20, 0],
+                y: [0, -20, 30, 0],
               }}
               transition={{
-                duration: 14,
+                duration: 10,
                 repeat: Infinity,
-                ease: "linear",
+                ease: "easeInOut",
               }}
-            >
-              <motion.div
-                className="absolute -left-10 top-10 h-40 w-40 rounded-full bg-red-500/40 blur-3xl"
-                animate={{
-                  x: [0, 40, -20, 0],
-                  y: [0, -20, 30, 0],
-                }}
-                transition={{
-                  duration: 10,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              <motion.div
-                className="absolute -bottom-12 right-0 h-44 w-44 rounded-full bg-white/15 blur-3xl"
-                animate={{
-                  x: [0, -30, 10, 0],
-                  y: [0, 20, -25, 0],
-                }}
-                transition={{
-                  duration: 11,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-
-              <div className="relative flex h-full flex-col justify-between p-6 text-sm text-zinc-100">
-                <div className="flex items-center justify-between gap-3">
+            />
+            <motion.div
+              className="absolute -bottom-12 right-0 h-44 w-44 rounded-full bg-white/15 blur-3xl"
+              animate={{
+                x: [0, -30, 10, 0],
+                y: [0, 20, -25, 0],
+              }}
+              transition={{
+                duration: 11,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <div className="relative flex h-full flex-col justify-between p-6 text-sm text-zinc-100">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between gap-4">
                   <div className="space-y-1">
-                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+                    <p className="text-xs uppercase tracking-[0.25em] text-zinc-200">
                       Recent Experience
                     </p>
-                    <p className="text-sm font-semibold text-zinc-50">
+                    <p className="text-base font-semibold text-zinc-50">
                       Frontend &amp; Fullstack Experiences
                     </p>
                   </div>
-                  <div className="rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[11px] font-medium text-zinc-200">
-                    Angular · .NET · SQL Server
+                  <div className="space-y-2 text-[11px]">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-red-500/20 px-2.5 py-1 text-red-50 shadow-[0_0_18px_rgba(239,68,68,0.4)]">
+                      <FiCode className="h-3.5 w-3.5" />
+                      Angular · .NET
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-zinc-100">
+                      <FiDatabase className="h-3.5 w-3.5 text-amber-200" />
+                      SQL Server
+                    </span>
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <p className="text-xs text-zinc-100/80 leading-relaxed">
+                  Completed a two-month internship @ IRPC Public Company Limited, leading end-to-end delivery of internal web applications—from requirements and database design through deployment into production—so stakeholders could use the tools immediately in their day-to-day work.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 text-[11px] text-zinc-100">
+                <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-black/40 px-2.5 py-1">
+                  <FiTool className="h-3.5 w-3.5 text-zinc-200" />
+                  Debugging &amp; Refactoring
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full border border-red-400/40 bg-red-500/15 px-2.5 py-1">
+                  <FiZap className="h-3.5 w-3.5 text-red-200" />
+                  CI/CD · Jenkins
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/10 px-2.5 py-1">
+                  <FiCode className="h-3.5 w-3.5 text-emerald-200" />
+                  Problem Solving
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="relative h-72 overflow-hidden rounded-[1.6rem] border border-white/12 bg-zinc-950/80 p-5 text-sm text-zinc-100 shadow-[0_24px_80px_rgba(0,0,0,0.4)]"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
+            <motion.div
+              className="pointer-events-none absolute inset-0 opacity-40"
+              animate={{
+                background: [
+                  "radial-gradient(circle at 0% 0%, rgba(239,68,68,0.45), transparent 55%)",
+                  "radial-gradient(circle at 80% 20%, rgba(255,255,255,0.25), transparent 60%)",
+                  "radial-gradient(circle at 0% 0%, rgba(239,68,68,0.45), transparent 55%)",
+                ],
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <div className="relative flex h-full flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-zinc-300">
+                  <span>Recent Project</span>
+                  <span className="rounded-full border border-red-400/50 bg-red-500/10 px-2 py-0.5 text-[10px] font-semibold text-red-200 shadow-[0_0_18px_rgba(239,68,68,0.4)]">
+                    Live
+                  </span>
+                </div>
+
+                <div className="space-y-1">
+                  <p className="text-base font-semibold text-zinc-50">My Portfolio</p>
                   <p className="text-xs text-zinc-300/90">
-                    2-month Internship @ IRPC Public Company Limited. Developed internal
-                    web apps, CI/CD pipelines, and database solutions that help
-                    real teams work more efficiently.
+                    A motion-rich Next.js experience showcasing projects, skills, and animated storytelling with custom scroll interactions.
                   </p>
-                  <div className="flex flex-wrap gap-2 text-[11px] text-zinc-200">
-                    <span className="rounded-full bg-white/10 px-2 py-1">
-                      Debugging &amp; Refactoring
-                    </span>
-                    <span className="rounded-full bg-white/5 px-2 py-1">
-                      CI/CD · Jenkins
-                    </span>
-                    <span className="rounded-full bg-white/5 px-2 py-1">
-                      Problem Solving
-                    </span>
-                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2 text-[11px] text-zinc-200">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                    Next.js
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                    TypeScript
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                    Framer Motion
+                  </span>
                 </div>
               </div>
-            </motion.div>
+
+              <motion.div
+                className="flex items-center justify-between pt-2 text-xs text-zinc-200"
+                animate={{ opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 4, repeat: Infinity }}
+              >
+                <span className="font-mono text-[11px] text-zinc-400">
+                  v3.0 · Responsive · 2025
+                </span>
+                <Link
+                  href="https://jarukit-pm.github.io/portfolio/"
+                  target="_blank"
+                  className="inline-flex items-center gap-1 rounded-full border border-white/20 px-3 py-1 text-[11px] font-semibold text-zinc-50 transition hover:border-red-400 hover:text-red-300"
+                >
+                  View live
+                  <FiExternalLink className="h-3.5 w-3.5" />
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>
