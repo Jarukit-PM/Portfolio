@@ -59,6 +59,9 @@ export function ContactSection() {
             <FiMail className="h-4 w-4 transition group-hover:-translate-y-0.5" />
             Email me
           </a>
+          <span className="text-xs font-mono text-zinc-400 sm:text-sm">
+            jarukit.pm@gmail.com
+          </span>
 
           <div className="flex items-center gap-3 text-zinc-300">
             <Link

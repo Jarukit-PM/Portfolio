@@ -2,9 +2,36 @@
 
 import { motion, type Variants } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import {
+  FiChevronLeft,
+  FiChevronRight,
+  FiServer,
+  FiShield,
+  FiUploadCloud,
+  FiWifi,
+} from "react-icons/fi";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiFramer,
+  SiTailwindcss,
+  SiAxios,
+  SiDotnet,
+  SiEjs,
+  SiFirebase,
+  SiFlask,
+  SiGnubash,
+  SiKalilinux,
+  SiMongodb,
+  SiNodedotjs,
+  SiPython,
+  SiUnity,
+  SiExpress,
+} from "react-icons/si";
 import projects from "@/data/projects.json";
 
 type Project = {
@@ -25,19 +52,71 @@ const cardVariants: Variants = {
   },
 };
 
+const tagIcons: Record<string, ReactNode> = {
+  React: <SiReact />,
+  "Next.js": <SiNextdotjs />,
+  TypeScript: <SiTypescript />,
+  "Framer Motion": <SiFramer />,
+  "Tailwind CSS": <SiTailwindcss />,
+  "Node.js": <SiNodedotjs />,
+  Express: <SiExpress />,
+  MongoDB: <SiMongodb />,
+  Multer: <FiUploadCloud />,
+  EJS: <SiEjs />,
+  Axios: <SiAxios />,
+  Unity: <SiUnity />,
+  "C#": <SiDotnet />,
+  "Firebase Realtime DB": <SiFirebase />,
+  "Firebase Auth": <SiFirebase />,
+  "Backend services": <FiServer />,
+  "Kali Linux": <SiKalilinux />,
+  Bash: <SiGnubash />,
+  "Aircrack-ng": <FiWifi />,
+  Hashcat: <FiShield />,
+  Flask: <SiFlask />,
+  Python: <SiPython />,
+};
+
+const tagColors: Record<string, string> = {
+  React: "text-sky-400",
+  "Next.js": "text-zinc-100",
+  TypeScript: "text-sky-300",
+  "Framer Motion": "text-pink-300",
+  "Tailwind CSS": "text-teal-300",
+  "Node.js": "text-green-400",
+  Express: "text-zinc-200",
+  MongoDB: "text-emerald-400",
+  Multer: "text-orange-300",
+  EJS: "text-yellow-300",
+  Axios: "text-blue-200",
+  Unity: "text-white",
+  "C#": "text-indigo-300",
+  "Firebase Realtime DB": "text-amber-300",
+  "Firebase Auth": "text-amber-300",
+  "Backend services": "text-red-200",
+  "Kali Linux": "text-cyan-300",
+  Bash: "text-lime-300",
+  "Aircrack-ng": "text-sky-200",
+  Hashcat: "text-rose-300",
+  Flask: "text-emerald-200",
+  Python: "text-yellow-200",
+};
+
 export function ProjectsSection() {
   const list = (projects as Project[]).map((p) => ({
     ...p,
     github: p.github ?? "https://github.com", // placeholder – replace with real repo per project
   }));
+  const DEFAULT_IMAGE = "/github-cover.svg";
 
-  // Duplicate projects for infinite scroll
-  const duplicatedProjects = [...list, ...list, ...list];
+  // Duplicate projects for infinite scroll (only if we have multiple projects)
+  const duplicatedProjects = list.length > 1 ? [...list, ...list, ...list] : list;
   const scrollRef = useRef<HTMLDivElement>(null);
   const pauseTimeout = useRef<NodeJS.Timeout | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
 
   const pauseAutoScroll = useCallback(() => {
     setIsHovered(true);
@@ -72,13 +151,17 @@ export function ProjectsSection() {
 
   const checkScrollButtons = useCallback(() => {
     const container = scrollRef.current;
-    if (!container) return;
+    if (!container || list.length <= 1) {
+      setShowLeftArrow(false);
+      setShowRightArrow(false);
+      return;
+    }
     
     setShowLeftArrow(container.scrollLeft > 0);
     setShowRightArrow(
       container.scrollLeft < container.scrollWidth - container.clientWidth - 10
     );
-  }, []);
+  }, [list.length]);
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -99,9 +182,17 @@ export function ProjectsSection() {
     };
   }, [checkScrollButtons]);
 
+  const handleImageError = useCallback((id: number) => {
+    setImageErrors((prev) => {
+      if (prev[id]) return prev;
+      return { ...prev, [id]: true };
+    });
+  }, []);
+
   useEffect(() => {
     const scrollContainer = scrollRef.current;
-    if (!scrollContainer || isHovered) return;
+    // Only enable auto-scroll if we have multiple projects
+    if (!scrollContainer || isHovered || list.length <= 1) return;
 
     const scroll = () => {
       if (scrollContainer) {
@@ -116,7 +207,7 @@ export function ProjectsSection() {
 
     const interval = setInterval(scroll, 20); // Adjust interval for smoothness
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, list.length]);
 
   return (
     <section
@@ -182,10 +273,15 @@ export function ProjectsSection() {
             WebkitOverflowScrolling: "touch",
           }}
         >
-          {duplicatedProjects.map((project, index) => (
+          {duplicatedProjects.map((project, index) => {
+            const imageSrc =
+              imageErrors[project.id] || !project.image
+                ? DEFAULT_IMAGE
+                : project.image;
+            return (
             <div
               key={`${project.id}-${index}`}
-              className="flex-shrink-0 w-80 sm:w-96"
+              className="shrink-0 w-80 sm:w-96"
               style={{ scrollSnapAlign: "start" }}
             >
               <Link
@@ -194,7 +290,7 @@ export function ProjectsSection() {
                 className="block h-full"
               >
                 <motion.article
-                  className="group relative h-full overflow-hidden rounded-2xl border border-zinc-800/70 bg-gradient-to-br from-black via-zinc-950 to-zinc-900 transition-transform hover:scale-[1.02]"
+                  className="group relative h-full overflow-hidden rounded-2xl border border-zinc-800/70 bg-linear-to-br from-black via-zinc-950 to-zinc-900 transition-transform hover:scale-[1.02]"
                   variants={cardVariants}
                   initial="hidden"
                   whileInView="visible"
@@ -212,12 +308,15 @@ export function ProjectsSection() {
                   <div className="flex h-full flex-col">
                     <div className="relative h-56 w-full overflow-hidden sm:h-64">
                       <Image
-                        src={project.image || "/github-cover.svg"}
+                        src={imageSrc}
                         alt={project.title}
                         fill
-                        className="object-cover object-[10%_10%] transition duration-500 group-hover:scale-105 group-hover:brightness-110"
+                        className="object-cover object-center transition duration-500 group-hover:scale-105 group-hover:brightness-110"
+                        priority
+                        unoptimized
+                        onError={() => handleImageError(project.id)}
                       />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
                     </div>
 
                     <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
@@ -235,9 +334,18 @@ export function ProjectsSection() {
                           {project.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="rounded-full border border-zinc-700/80 bg-zinc-900/80 px-2.5 py-1"
+                              className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700/80 bg-zinc-900/80 px-2.5 py-1"
                             >
-                              {tag}
+                              {tagIcons[tag] && (
+                                <span
+                                  className={`text-xs ${
+                                    tagColors[tag] ?? "text-zinc-300"
+                                  }`}
+                                >
+                                  {tagIcons[tag]}
+                                </span>
+                              )}
+                              <span>{tag}</span>
                             </span>
                           ))}
                         </div>
@@ -251,7 +359,8 @@ export function ProjectsSection() {
                 </motion.article>
               </Link>
             </div>
-          ))}
+          );
+          })}
         </div>
       </div>
     </section>

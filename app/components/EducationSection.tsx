@@ -80,7 +80,7 @@ export function EducationSection() {
             viewport={{ once: true, amount: 0.3 }}
             custom={index}
           >
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-emerald-400/60 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-red-400/60 to-transparent" />
             <div className="flex items-start gap-3">
               {item.schoolLogo && (
                 <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">

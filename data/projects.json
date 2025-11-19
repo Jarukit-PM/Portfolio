@@ -2,10 +2,44 @@
   {
     "id": 1,
     "title": "My Portfolio",
-    "description": "A highly animated portfolio website built with Next.js, Framer Motion, and Three.js to showcase my work and experience.",
-    "tags": ["React", "Next.js"],
+    "description": "A highly animated and modern portfolio website built with Next.js, TypeScript, and Framer Motion. Features smooth animations, responsive design, and interactive sections to showcase projects, skills, and experience.",
+    "image": "/images/Image_profolio.png",
+    "tags": ["React", "Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
     "link": "https://jarukit-pm.github.io/portfolio/",
     "github": "https://github.com/Jarukit-PM/portfolio"
+  },
+  {
+    "id": 2,
+    "title": "Figure Shop",
+    "description": "Architected a buy-and-sell marketplace for collectible figures with an Express REST API that handles catalog CRUD, image uploads, discounts, carts, orders, and payment metadata while running analytics aggregations for best-selling categories and customer spending; the EJS frontend consumes the APIs via Axios to deliver an admin-ready dashboard and storefront.",
+    "image": "/images/project/figureShop.png",
+    "tags": ["Node.js", "Express", "MongoDB", "Multer", "EJS", "Axios"],
+    "link": "https://github.com/Jarukit-PM/Final_Project_Database_SQL",
+    "github": "https://github.com/Jarukit-PM/Final_Project_Database_SQL"
+  },
+  {
+    "id": 3,
+    "title": "Another Story Another Legacy (ASAL)",
+    "description": "Owned the online TTRPG platform’s backend by designing Firebase Realtime Database schemas for characters, inventories, and maps while building C# services that sync gameplay data, and enforce secure account authentication so Dungeon Masters and players can collaborate live.",
+    "image": "/images/project/ASAL.png",
+    "tags": [
+      "Unity",
+      "C#",
+      "Firebase Realtime DB",
+      "Firebase Auth",
+      "Backend services"
+    ],
+    "link": "https://github.com/Jarukit-PM/Dnd_Game",
+    "github": "https://github.com/Jarukit-PM/Dnd_Game"
+  },
+  {
+    "id": 4,
+    "title": "Wi-Fi Authentication Attack Simulator",
+    "description": "Built an educational red-team toolkit that automates WPA/WPA2 handshake capture, deauthentication workflows, Hashcat cracking pipelines, and Evil Twin captive portals with a Flask credential collector, focusing on ethical Wi-Fi security research and hardening recommendations.",
+    "image": "/images/project/wi-fi-attack.png",
+    "tags": ["Kali Linux", "Bash", "Aircrack-ng", "Hashcat", "Flask", "Python"],
+    "link": "https://github.com/Jarukit-PM/Wifi-Authentication-Attack",
+    "github": "https://github.com/Jarukit-PM/Wifi-Authentication-Attack"
   }
 ]
 
