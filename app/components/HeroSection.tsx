@@ -11,6 +11,7 @@ import {
   FiTool,
   FiZap,
 } from "react-icons/fi";
+import { SiNextdotjs, SiTypescript, SiFramer } from "react-icons/si";
 import Link from "next/link";
 
 const container: Variants = {
@@ -304,13 +305,16 @@ export function HeroSection() {
                 </div>
 
                 <div className="flex flex-wrap gap-2 text-[11px] text-zinc-200">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                    <SiNextdotjs className="h-3.5 w-3.5 text-zinc-100" />
                     Next.js
                   </span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                    <SiTypescript className="h-3.5 w-3.5 text-sky-300" />
                     TypeScript
                   </span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                    <SiFramer className="h-3.5 w-3.5 text-pink-300" />
                     Framer Motion
                   </span>
                 </div>
