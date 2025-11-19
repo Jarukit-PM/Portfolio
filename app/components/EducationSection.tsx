@@ -73,7 +73,7 @@ export function EducationSection() {
         {education.map((item, index) => (
           <motion.article
             key={item.degree}
-            className="relative overflow-hidden rounded-2xl border border-zinc-800/70 bg-gradient-to-br from-zinc-950 via-zinc-950/95 to-zinc-900/80 p-5 sm:p-6"
+            className="relative overflow-hidden rounded-2xl border border-zinc-800/70 bg-linear-to-br from-zinc-950 via-zinc-950/95 to-zinc-900/80 p-5 sm:p-6"
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
@@ -90,6 +90,7 @@ export function EducationSection() {
                     fill
                     className="object-contain"
                     sizes="80px"
+                    unoptimized
                   />
                 </div>
               )}

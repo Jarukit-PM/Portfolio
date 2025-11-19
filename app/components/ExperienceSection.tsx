@@ -86,7 +86,7 @@ export function ExperienceSection() {
         {experiences.map((exp, index) => (
           <motion.article
             key={exp.role}
-            className="relative overflow-hidden rounded-2xl border border-zinc-800/60 bg-gradient-to-br from-zinc-950 via-zinc-950/95 to-zinc-900/80 p-5 sm:p-6"
+            className="relative overflow-hidden rounded-2xl border border-zinc-800/60 bg-linear-to-br from-zinc-950 via-zinc-950/95 to-zinc-900/80 p-5 sm:p-6"
             variants={sectionVariants}
             initial="hidden"
             whileInView="visible"
@@ -105,6 +105,7 @@ export function ExperienceSection() {
                       fill
                       className="object-contain"
                       sizes="96px"
+                      unoptimized
                     />
                   </div>
                 )}
@@ -126,7 +127,7 @@ export function ExperienceSection() {
             <ul className="mt-4 space-y-2 text-xs leading-relaxed text-zinc-300 sm:text-sm">
               {exp.bullets.map((item) => (
                 <li key={item} className="flex gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-zinc-500" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-500" />
                   <span>{item}</span>
                 </li>
               ))}
