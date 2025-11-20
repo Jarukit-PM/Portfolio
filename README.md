@@ -2,7 +2,7 @@
 
 Portfolio website built with Next.js, TypeScript, Tailwind CSS, Framer Motion, and Three.js.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Next.js 16** - React framework with App Router
 - **TypeScript** - Type safety
@@ -12,7 +12,7 @@ Portfolio website built with Next.js, TypeScript, Tailwind CSS, Framer Motion, a
 - **React Three Fiber** - React renderer for Three.js
 - **React Icons** - Icon library
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Portfolio/
@@ -30,7 +30,7 @@ Portfolio/
 └── package.json       # Dependencies
 ```
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### Install Dependencies
 
@@ -53,7 +53,7 @@ npm run build
 npm start
 ```
 
-## 📝 Next Steps
+## Next Steps
 
 1. Add your personal information and projects to `data/` folder
 2. Create components in `app/components/`
@@ -61,15 +61,15 @@ npm start
 4. Customize styles and animations
 5. Deploy to Vercel or your preferred platform
 
-## 📚 Documentation
+## Documentation
 
 See `TECH_STACK.md` for detailed tech stack recommendations.
 
-## 🎨 Features
+## Features
 
-- ✨ Beautiful animations with Framer Motion
-- 🎭 3D graphics with Three.js
-- 📱 Fully responsive design
-- 🌙 Dark mode support (ready to implement)
-- 📄 Resume download functionality
-- ⚡ Fast performance with Next.js optimization
+- Smooth animations with Framer Motion
+- Immersive 3D graphics powered by Three.js
+- Fully responsive layout across devices
+- Dark mode support ready for implementation
+- Resume download functionality
+- Optimized performance with Next.js

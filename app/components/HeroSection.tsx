@@ -340,11 +340,11 @@ export function HeroSection() {
                   v3.0 · Responsive · 2025
                 </span>
                 <Link
-                  href="https://jarukit-pm.github.io/portfolio/"
+                  href="https://github.com/Jarukit-PM/Portfolio"
                   target="_blank"
                   className="inline-flex items-center gap-1 rounded-full border border-white/20 px-3 py-1 text-[11px] font-semibold text-zinc-50 transition hover:border-red-400 hover:text-red-300"
                 >
-                  View live
+                  View source
                   <FiExternalLink className="h-3.5 w-3.5" />
                 </Link>
               </motion.div>
