@@ -132,8 +132,9 @@ export function HeroSection() {
               className="max-w-xl text-sm sm:text-base text-zinc-300"
             >
               Frontend Developer · Fullstack Developer · Software Engineer.
-              Passionate about building immersive web experiences with clean
-              code, smooth animations, and delightful details.
+              Focused on shipping end-to-end products that pair solid UX with
+              well-structured REST APIs, reliable databases, and deployment-ready
+              architecture.
             </motion.p>
 
             <motion.div
@@ -165,9 +166,14 @@ export function HeroSection() {
             </Link>
 
             <div className="flex items-center gap-3 text-zinc-300">
-              <span className="text-xs uppercase tracking-[0.18em] text-zinc-400">
-                Connect
-              </span>
+              <Link
+                href="https://jarukit-pm.github.io/My-Resume"
+                target="_blank"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-100 transition hover:border-red-400 hover:text-red-300"
+              >
+                Resume
+                <FiExternalLink className="h-3.5 w-3.5" />
+              </Link>
               <Link
                 href="https://www.linkedin.com/in/jarukit-pan-iam-10b84b391/"
                 target="_blank"
