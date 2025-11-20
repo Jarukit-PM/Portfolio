@@ -40,6 +40,15 @@
     "tags": ["Kali Linux", "Bash", "Aircrack-ng", "Hashcat", "Flask", "Python"],
     "link": "https://github.com/Jarukit-PM/Wifi-Authentication-Attack",
     "github": "https://github.com/Jarukit-PM/Wifi-Authentication-Attack"
+  },
+  {
+    "id": 5,
+    "title": "Pacman FPGA",
+    "description": "Engineered a Pac-Man style hardware game entirely in Verilog for Xilinx Artix-7 boards, featuring a 640×480 VGA pipeline, Pac-Man and ghost FSMs, collectible-driven scoring, heart-based lives, and a Vivado project ready for bitstream generation.",
+    "image": "/images/project/Pacman.png",
+    "tags": ["Verilog", "FPGA", "Vivado", "Hardware"],
+    "link": "https://github.com/Jarukit-PM/Pacman_FPGA",
+    "github": "https://github.com/Jarukit-PM/Pacman_FPGA"
   }
 ]
 
