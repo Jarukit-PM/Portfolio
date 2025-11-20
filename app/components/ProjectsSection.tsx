@@ -13,6 +13,8 @@ import {
   FiShield,
   FiUploadCloud,
   FiWifi,
+  FiUsers,
+  FiTool,
 } from "react-icons/fi";
 import {
   SiReact,
@@ -32,6 +34,10 @@ import {
   SiPython,
   SiUnity,
   SiExpress,
+  SiGo,
+  SiJavascript,
+  SiPostgresql,
+  SiDocker,
 } from "react-icons/si";
 import projects from "@/data/projects.json";
 import { getImagePath } from "@/app/lib/utils";
@@ -77,6 +83,12 @@ const tagIcons: Record<string, ReactNode> = {
   Hashcat: <FiShield />,
   Flask: <SiFlask />,
   Python: <SiPython />,
+  Go: <SiGo />,
+  JavaScript: <SiJavascript />,
+  PostgreSQL: <SiPostgresql />,
+  Docker: <SiDocker />,
+  "Dev Container": <FiTool />,
+  "HR Module": <FiUsers />,
 };
 
 const tagColors: Record<string, string> = {
@@ -102,6 +114,12 @@ const tagColors: Record<string, string> = {
   Hashcat: "text-rose-300",
   Flask: "text-emerald-200",
   Python: "text-yellow-200",
+  Go: "text-cyan-300",
+  JavaScript: "text-amber-300",
+  PostgreSQL: "text-sky-300",
+  Docker: "text-blue-300",
+  "Dev Container": "text-indigo-300",
+  "HR Module": "text-rose-200",
 };
 
 export function ProjectsSection() {

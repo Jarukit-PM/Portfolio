@@ -49,6 +49,15 @@
     "tags": ["Verilog", "FPGA", "Vivado", "Hardware"],
     "link": "https://github.com/Jarukit-PM/Pacman_FPGA",
     "github": "https://github.com/Jarukit-PM/Pacman_FPGA"
+  },
+  {
+    "id": 6,
+    "title": "CPE494 Fullstack · ModEd",
+    "description": "Owned the HR module for ModEd in the CPE494 Fullstack program—designing the employee data model, leave-approval workflows, and integration hooks—while building inside the shared VS Code Dev Container so Docker, Go services, and the JavaScript UI could stay in sync for 30+ collaborators.",
+    "image": "/images/project/CPE494.png",
+    "tags": ["Go", "JavaScript", "PostgreSQL", "Docker", "Dev Container", "HR Module"],
+    "link": "https://github.com/Thanaphol47825/cpe494-fullstack-2025",
+    "github": "https://github.com/Thanaphol47825/cpe494-fullstack-2025"
   }
 ]
 
