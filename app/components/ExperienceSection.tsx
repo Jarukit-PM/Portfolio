@@ -2,8 +2,8 @@
 
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
-import { useState, useCallback } from "react";
-import { getImagePath } from "@/app/lib/utils";
+import { useState, useCallback, useEffect } from "react";
+import { getImagePath, getBasePath } from "@/app/lib/utils";
 import {
   SiAngular,
   SiDotnet,
@@ -66,7 +66,17 @@ const experiences = [
 
 export function ExperienceSection() {
   const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});
-  const DEFAULT_LOGO = getImagePath("/github-cover.svg");
+  const [basePath, setBasePath] = useState("");
+  
+  // Get basePath after component mounts
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = getBasePath();
+      setBasePath(path);
+    }
+  }, []);
+  
+  const DEFAULT_LOGO = basePath ? `${basePath}/logo-placeholder.svg` : "/logo-placeholder.svg";
 
   const handleLogoError = useCallback((key: string) => {
     setLogoErrors((prev) => {
@@ -112,7 +122,11 @@ export function ExperienceSection() {
                 {exp.companyLogo && (
                   <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">
                     <Image
-                      src={logoErrors[exp.company] || !exp.companyLogo ? DEFAULT_LOGO : getImagePath(exp.companyLogo)}
+                      src={logoErrors[exp.company] || !exp.companyLogo 
+                        ? DEFAULT_LOGO 
+                        : basePath 
+                          ? `${basePath}${exp.companyLogo}` 
+                          : exp.companyLogo}
                       alt={`${exp.company} logo`}
                       fill
                       className="object-contain"

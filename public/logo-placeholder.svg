@@ -1,0 +1,8 @@
+<svg width="96" height="64" viewBox="0 0 96 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="96" height="64" rx="8" fill="#18181b"/>
+  <rect x="1" y="1" width="94" height="62" rx="7" stroke="#3f3f46" stroke-width="2"/>
+  <path d="M24 32L32 24L40 32L32 40L24 32Z" fill="#71717a" opacity="0.5"/>
+  <path d="M56 32L64 24L72 32L64 40L56 32Z" fill="#71717a" opacity="0.5"/>
+  <text x="48" y="38" font-family="Arial, sans-serif" font-size="10" fill="#71717a" text-anchor="middle" opacity="0.6">LOGO</text>
+</svg>
+

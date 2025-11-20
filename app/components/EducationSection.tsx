@@ -2,8 +2,8 @@
 
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
-import { useState, useCallback } from "react";
-import { getImagePath } from "@/app/lib/utils";
+import { useState, useCallback, useEffect } from "react";
+import { getImagePath, getBasePath } from "@/app/lib/utils";
 import { HiCodeBracket, HiLightBulb } from "react-icons/hi2";
 import { FaRocket, FaGraduationCap } from "react-icons/fa";
 
@@ -56,7 +56,17 @@ const education = [
 
 export function EducationSection() {
   const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});
-  const DEFAULT_LOGO = getImagePath("/github-cover.svg");
+  const [basePath, setBasePath] = useState("");
+  
+  // Get basePath after component mounts
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = getBasePath();
+      setBasePath(path);
+    }
+  }, []);
+  
+  const DEFAULT_LOGO = basePath ? `${basePath}/logo-placeholder.svg` : "/logo-placeholder.svg";
 
   const handleLogoError = useCallback((key: string) => {
     setLogoErrors((prev) => {
@@ -97,7 +107,11 @@ export function EducationSection() {
               {item.schoolLogo && (
                 <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-900/50 p-2">
                   <Image
-                    src={logoErrors[item.school] || !item.schoolLogo ? DEFAULT_LOGO : getImagePath(item.schoolLogo)}
+                    src={logoErrors[item.school] || !item.schoolLogo 
+                      ? DEFAULT_LOGO 
+                      : basePath 
+                        ? `${basePath}${item.schoolLogo}` 
+                        : item.schoolLogo}
                     alt={`${item.school} logo`}
                     fill
                     className="object-contain"

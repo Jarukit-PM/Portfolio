@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { getBasePath } from "@/app/lib/utils";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -108,7 +109,18 @@ export function ProjectsSection() {
     ...p,
     github: p.github ?? "https://github.com", // placeholder – replace with real repo per project
   }));
-  const DEFAULT_IMAGE = getImagePath("/github-cover.svg"); // Will be computed on each render to get current basePath
+  
+  const [basePath, setBasePath] = useState("");
+  
+  // Get basePath after component mounts
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = getBasePath();
+      setBasePath(path);
+    }
+  }, []);
+  
+  const DEFAULT_IMAGE = basePath ? `${basePath}/github-cover.svg` : "/github-cover.svg";
 
   // Duplicate projects for infinite scroll (only if we have multiple projects)
   const duplicatedProjects = list.length > 1 ? [...list, ...list, ...list] : list;
@@ -278,7 +290,9 @@ export function ProjectsSection() {
             const imageSrc =
               imageErrors[project.id] || !project.image
                 ? DEFAULT_IMAGE
-                : getImagePath(project.image);
+                : basePath 
+                  ? `${basePath}${project.image}` 
+                  : project.image;
             return (
             <div
               key={`${project.id}-${index}`}

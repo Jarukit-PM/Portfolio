@@ -13,7 +13,8 @@ import {
 } from "react-icons/fi";
 import { SiNextdotjs, SiTypescript, SiFramer } from "react-icons/si";
 import Link from "next/link";
-import { getImagePath } from "@/app/lib/utils";
+import { useState, useEffect } from "react";
+import { getBasePath } from "@/app/lib/utils";
 
 const container: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -65,6 +66,15 @@ const glowOrb: Variants = {
 
 export function HeroSection() {
   const name = "Jarukit Pan-Iam";
+  const [basePath, setBasePath] = useState("");
+  
+  // Get basePath after component mounts
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = getBasePath();
+      setBasePath(path);
+    }
+  }, []);
 
   return (
     <section id="about" className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-3xl border border-zinc-800/40 bg-linear-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 shadow-[0_0_60px_rgba(0,0,0,0.7)] sm:px-10 lg:px-16">
@@ -147,7 +157,7 @@ export function HeroSection() {
             className="flex flex-wrap items-center gap-4 pt-4"
           >
             <Link
-              href={getImagePath("/resume/jarukit-pan-iam-resume.pdf")}
+              href={basePath ? `${basePath}/resume/jarukit-pan-iam-resume.pdf` : "/resume/jarukit-pan-iam-resume.pdf"}
               className="group inline-flex items-center gap-2 rounded-full bg-zinc-50 px-6 py-3 text-sm font-semibold text-zinc-900 shadow-lg shadow-red-500/30 transition hover:bg-red-500 hover:text-zinc-50"
             >
               <FiDownload className="h-4 w-4 transition group-hover:-translate-y-0.5" />
