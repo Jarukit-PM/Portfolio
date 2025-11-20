@@ -267,7 +267,7 @@ export function HeroSection() {
                 </div>
 
                 <p className="text-xs text-zinc-100/80 leading-relaxed">
-                  Completed a two-month internship @ IRPC Public Company Limited, leading end-to-end delivery of internal web applications—from requirements and database design through deployment into production—so stakeholders could use the tools immediately in their day-to-day work.
+                  Completed a two-month internship @ IRPC Public Company Limited, leading end-to-end delivery of internal web applications—from requirements and database design through deployment into production—so stakeholders could use the tools immediately in their work.
                 </p>
               </div>
 
