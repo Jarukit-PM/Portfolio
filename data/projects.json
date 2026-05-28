@@ -58,6 +58,22 @@
     "tags": ["Go", "JavaScript", "PostgreSQL", "Docker", "Dev Container", "HR Module"],
     "link": "https://github.com/Thanaphol47825/cpe494-fullstack-2025",
     "github": "https://github.com/Thanaphol47825/cpe494-fullstack-2025"
+  },
+  {
+    "id": 7,
+    "title": "SpaceShare",
+    "description": "Led product delivery for SpaceShare, a pre-launch two-sided logistics marketplace connecting B2B shippers with inter-province drivers on planned routes. Owned end-to-end project scope and feature design for the driver-selected delivery workflow, aligned stakeholders on requirements and constraints, translated business context into clear specs/user flows, prioritized roadmap and backlog, and coordinated execution across API, mobile (driver), and web (company/admin) surfaces.",
+    "tags": [
+      "Project Management",
+      "Go",
+      "PostgreSQL",
+      "Redis",
+      "Expo",
+      "React Native",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS"
+    ]
   }
 ]
 
