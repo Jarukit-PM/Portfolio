@@ -5,7 +5,7 @@
     "title": "SpaceShare",
     "stars": 5,
     "image": "/images/project/SpaceShare_cover.png",
-    "description": "Led product delivery for SpaceShare, a pre-launch two-sided logistics marketplace connecting B2B shippers with inter-province drivers on planned routes. Owned end-to-end project scope and feature design for the driver-selected delivery workflow, aligned stakeholders on requirements and constraints, translated business context into clear specs/user flows, prioritized roadmap and backlog, and coordinated execution across API, mobile (driver), and web (company/admin) surfaces.",
+    "description": "Led product delivery for SpaceShare — a logistics marketplace with a driver mobile app (Expo/React Native), company/admin web app (Next.js), and Go API. Scoped and coordinated the driver-selected delivery workflow across all three surfaces: planned routes, on-route packages, pack/ship, tracking, and proof-of-delivery.",
     "tags": [
       "Project Management",
       "Go",
@@ -16,7 +16,8 @@
       "Next.js",
       "TypeScript",
       "Tailwind CSS"
-    ]
+    ],
+    "demo": "https://youtu.be/Xg2bapbKC6Q?si=xzm0jGQGkolrtS2w"
   },
   {
     "id": 5,

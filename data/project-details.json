@@ -1,4 +1,69 @@
 {
+  "spaceshare": {
+    "overview": "SpaceShare connects B2B shippers with inter-province drivers who already have a planned trip and spare capacity in their vehicle. We shipped three products — a driver mobile app, a company/admin web app, and a shared backend API — around a driver-selected delivery model: no auto-matching; drivers choose packages on their route, pack with capacity checks, then deliver with proof-of-delivery.",
+    "highlights": [
+      {
+        "title": "Mobile app",
+        "icon": "mobile",
+        "subtitle": "Drivers · Expo + React Native",
+        "bullets": [
+          "Planned routes — origin, destination, time, capacity, max deviation",
+          "Browse on-route packages and select shipments to carry",
+          "Maps, job list, delivery completion, notifications"
+        ]
+      },
+      {
+        "title": "Web app",
+        "icon": "web",
+        "subtitle": "Companies & admins · Next.js + TypeScript",
+        "bullets": [
+          "Create and manage packages / shipments",
+          "Team roles and permissions",
+          "Track status, notifications, login & verification"
+        ]
+      },
+      {
+        "title": "Backend API",
+        "icon": "api",
+        "subtitle": "Go · PostgreSQL · Redis",
+        "bullets": [
+          "Planned routes and deviation-based package lists (PostGIS)",
+          "Pack shipment with capacity validation",
+          "Status timeline, JWT auth, shared mobile + web contracts"
+        ]
+      },
+      {
+        "title": "Core workflow",
+        "icon": "workflow",
+        "subtitle": "Driver-selected delivery",
+        "bullets": [
+          "Route → on-route packages → driver picks (no auto-match)",
+          "Pack confirm → navigate → proof of delivery",
+          "List filters by route deviation today; time/capacity on roadmap"
+        ]
+      },
+      {
+        "title": "Product delivery",
+        "icon": "management",
+        "subtitle": "Project management",
+        "bullets": [
+          "MVP scope for inter-province B2B and pilot corridors",
+          "Backlog across API, mobile, and web",
+          "Aligned founders and engineers on roles and business rules"
+        ]
+      },
+      {
+        "title": "Status",
+        "icon": "launch",
+        "subtitle": "Pre-launch · pilot-ready",
+        "bullets": [
+          "Core loop live on all three surfaces",
+          "Private repo — full walkthrough in demo video below"
+        ]
+      }
+    ],
+    "role": "Project Manager — owned scope, specs, and delivery across the mobile app, web app, and API. Defined user flows per role (driver vs. company/admin), prioritized the backlog, and kept all surfaces aligned on the driver-selected delivery model."
+  },
   "my-portfolio": {
     "overview": "This site is the portfolio you're browsing — a static Next.js app with App Router, Framer Motion, and Three.js. I use it to present projects, skills, experience, and a downloadable resume, with smooth section animations and a dark zinc theme with red accents. It deploys to GitHub Pages with an optional `/portfolio` base path.",
     "highlights": [
