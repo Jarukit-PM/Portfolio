@@ -14,12 +14,35 @@ export type Project = {
   demo?: string;
 };
 
+export type HighlightIconKey =
+  | "mobile"
+  | "web"
+  | "api"
+  | "workflow"
+  | "management"
+  | "launch";
+
+export type ProjectHighlightStructured = {
+  title: string;
+  subtitle?: string;
+  bullets: string[];
+  icon?: HighlightIconKey;
+};
+
+export type ProjectHighlight = string | ProjectHighlightStructured;
+
 export type ProjectDetailContent = {
   overview: string;
-  highlights: string[];
+  highlights: ProjectHighlight[];
   role?: string;
   disclaimer?: string;
 };
+
+export function isStructuredHighlight(
+  item: ProjectHighlight
+): item is ProjectHighlightStructured {
+  return typeof item === "object" && item !== null && "bullets" in item;
+}
 
 export const projects = projectsData as Project[];
 

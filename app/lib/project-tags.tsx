@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import {
+  FiBriefcase,
   FiServer,
   FiShield,
   FiUploadCloud,
@@ -29,6 +30,8 @@ import {
   SiJavascript,
   SiPostgresql,
   SiDocker,
+  SiExpo,
+  SiRedis,
 } from "react-icons/si";
 
 export const tagIcons: Record<string, ReactNode> = {
@@ -60,6 +63,10 @@ export const tagIcons: Record<string, ReactNode> = {
   Docker: <SiDocker />,
   "Dev Container": <FiTool />,
   "HR Module": <FiUsers />,
+  "Project Management": <FiBriefcase />,
+  Redis: <SiRedis />,
+  Expo: <SiExpo />,
+  "React Native": <SiReact />,
 };
 
 export const tagColors: Record<string, string> = {
@@ -91,4 +98,8 @@ export const tagColors: Record<string, string> = {
   Docker: "text-blue-300",
   "Dev Container": "text-indigo-300",
   "HR Module": "text-rose-200",
+  "Project Management": "text-amber-200",
+  Redis: "text-red-400",
+  Expo: "text-zinc-100",
+  "React Native": "text-sky-400",
 };

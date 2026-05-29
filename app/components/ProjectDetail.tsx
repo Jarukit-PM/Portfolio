@@ -6,11 +6,23 @@ import type { ReactNode } from "react";
 import {
   FiAlertTriangle,
   FiArrowUpRight,
+  FiBriefcase,
   FiExternalLink,
   FiGithub,
+  FiMap,
+  FiMonitor,
   FiPlay,
+  FiServer,
+  FiSmartphone,
+  FiZap,
 } from "react-icons/fi";
-import type { Project, ProjectDetailContent } from "@/app/lib/projects";
+import type {
+  HighlightIconKey,
+  Project,
+  ProjectDetailContent,
+  ProjectHighlight,
+} from "@/app/lib/projects";
+import { isStructuredHighlight } from "@/app/lib/projects";
 import { tagColors, tagIcons } from "@/app/lib/project-tags";
 import { ProjectStars } from "@/app/components/ProjectStars";
 import { getImagePath, getYouTubeVideoId } from "@/app/lib/utils";
@@ -154,14 +166,27 @@ const featureCardClassName =
 const featureCardInteractiveClassName =
   "transition duration-300 hover:border-red-500/30 hover:shadow-[0_12px_40px_-16px_rgba(239,68,68,0.22)] hover:-translate-y-0.5";
 
+const highlightIcons: Record<HighlightIconKey, ReactNode> = {
+  mobile: <FiSmartphone className="h-5 w-5" aria-hidden />,
+  web: <FiMonitor className="h-5 w-5" aria-hidden />,
+  api: <FiServer className="h-5 w-5" aria-hidden />,
+  workflow: <FiMap className="h-5 w-5" aria-hidden />,
+  management: <FiBriefcase className="h-5 w-5" aria-hidden />,
+  launch: <FiZap className="h-5 w-5" aria-hidden />,
+};
+
+function highlightKey(item: ProjectHighlight, index: number): string {
+  return isStructuredHighlight(item) ? item.title : `${item}-${index}`;
+}
+
 function FeatureHighlightCard({
   item,
   index,
 }: {
-  item: string;
+  item: ProjectHighlight;
   index: number;
 }) {
-  const { title, body } = parseHighlight(item);
+  const structured = isStructuredHighlight(item);
 
   return (
     <>
@@ -172,24 +197,66 @@ function FeatureHighlightCard({
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-red-500/35 to-transparent opacity-0 transition group-hover:opacity-100" />
       <div className="flex gap-4 sm:gap-5">
         <span
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-red-500/35 bg-red-500/15 text-sm font-bold tabular-nums tracking-tight text-red-200 shadow-[0_0_20px_-6px_rgba(239,68,68,0.45)] sm:h-11 sm:w-11 sm:text-base"
+          className="flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl border border-red-500/35 bg-red-500/15 text-red-200 shadow-[0_0_20px_-6px_rgba(239,68,68,0.45)] sm:h-11 sm:w-11"
           aria-hidden
         >
-          {String(index + 1).padStart(2, "0")}
+          {structured && item.icon ? (
+            highlightIcons[item.icon]
+          ) : (
+            <span className="text-sm font-bold tabular-nums tracking-tight sm:text-base">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          )}
         </span>
-        <div className="min-w-0 flex-1 space-y-1.5 pt-0.5">
-          {title ? (
-            <p className="text-sm font-semibold leading-snug text-zinc-100 sm:text-base">
-              {title}
-            </p>
-          ) : null}
-          <p
-            className={`text-sm leading-relaxed text-zinc-300 sm:text-base sm:leading-7 ${
-              title ? "" : "font-medium text-zinc-200"
-            }`}
-          >
-            {body}
-          </p>
+        <div className="min-w-0 flex-1 space-y-2.5 pt-0.5">
+          {structured ? (
+            <>
+              <div className="space-y-1">
+                <p className="text-base font-semibold leading-snug text-zinc-50">
+                  {item.title}
+                </p>
+                {item.subtitle ? (
+                  <p className="text-xs font-medium uppercase tracking-wide text-red-300/90">
+                    {item.subtitle}
+                  </p>
+                ) : null}
+              </div>
+              <ul className="space-y-2 pl-0.5">
+                {item.bullets.map((bullet) => (
+                  <li
+                    key={bullet}
+                    className="flex gap-2.5 text-sm leading-relaxed text-zinc-200 sm:text-[0.9375rem] sm:leading-6"
+                  >
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red-400/90"
+                      aria-hidden
+                    />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            (() => {
+              const { title, body } = parseHighlight(item);
+              return (
+                <>
+                  {title ? (
+                    <p className="text-base font-semibold leading-snug text-zinc-50">
+                      {title}
+                    </p>
+                  ) : null}
+                  <p
+                    className={`text-sm leading-relaxed text-zinc-200 sm:text-[0.9375rem] sm:leading-6 ${
+                      title ? "" : "font-medium"
+                    }`}
+                  >
+                    {body}
+                  </p>
+                </>
+              );
+            })()
+          )}
         </div>
       </div>
     </>
@@ -248,7 +315,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
           </div>
         </div>
 
-        <p className="mt-5 max-w-3xl text-sm leading-relaxed text-zinc-400 sm:mt-6 sm:text-base">
+        <p className="mt-5 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:mt-6 sm:text-base sm:leading-7">
           {project.description}
         </p>
       </HeroWrapper>
@@ -279,7 +346,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
 
       <AnimatedSection className="space-y-4" reduceMotion={reduceMotion}>
         <SectionHeading id="overview">Overview</SectionHeading>
-        <p className="max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base sm:leading-7">
+        <p className="max-w-3xl text-sm leading-relaxed text-zinc-200 sm:text-base sm:leading-7">
           {detail.overview}
         </p>
       </AnimatedSection>
@@ -287,16 +354,16 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
       <AnimatedSection className="space-y-5" reduceMotion={reduceMotion}>
         <SectionHeading id="features">Key features</SectionHeading>
         {reduceMotion ? (
-          <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+          <ul className="grid gap-5 sm:grid-cols-2 sm:gap-6">
             {detail.highlights.map((item, index) => (
-              <li key={item} className={featureCardClassName}>
+              <li key={highlightKey(item, index)} className={featureCardClassName}>
                 <FeatureHighlightCard item={item} index={index} />
               </li>
             ))}
           </ul>
         ) : (
           <motion.ul
-            className="grid gap-4 sm:grid-cols-2 sm:gap-5"
+            className="grid gap-5 sm:grid-cols-2 sm:gap-6"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -304,7 +371,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
           >
             {detail.highlights.map((item, index) => (
               <motion.li
-                key={item}
+                key={highlightKey(item, index)}
                 variants={fadeUp}
                 className={`${featureCardClassName} ${featureCardInteractiveClassName}`}
               >
@@ -320,7 +387,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
           <SectionHeading id="role">My role</SectionHeading>
           <div className="relative overflow-hidden rounded-2xl border border-zinc-800/70 border-l-2 border-l-red-500/50 bg-zinc-900/40 px-5 py-4 sm:px-6 sm:py-5">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-red-500/40 via-transparent to-transparent" />
-            <p className="max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base sm:leading-7">
+            <p className="max-w-3xl text-sm leading-relaxed text-zinc-200 sm:text-base sm:leading-7">
               {detail.role}
             </p>
           </div>
