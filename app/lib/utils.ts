@@ -6,88 +6,92 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Get the base path for GitHub Pages deployment
- * This should match the logic in next.config.ts
- * For static export, we detect it from the current URL at runtime
+ * Base path for static assets. Matches next.config.ts `basePath` (e.g. `/portfolio` on GitHub Pages).
+ * Do not infer from URL segments like `/projects` — that breaks image paths on app routes.
  */
 export function getBasePath(): string {
-  // Only run on client-side
+  const configured = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  if (configured) {
+    return configured;
+  }
+
   if (typeof window === "undefined") {
     return "";
   }
-  
+
   try {
     const hostname = window.location.hostname;
-    const pathname = window.location.pathname;
-    
-    // For GitHub Pages (github.io domain)
-    if (hostname.includes("github.io")) {
-      // Extract repository name from pathname: /repository-name/...
-      const pathSegments = pathname.split("/").filter(Boolean);
-      
-      // If pathname has segments and first one is not a page route, use it
-      if (pathSegments.length > 0) {
-        const firstSegment = pathSegments[0];
-        const pageRoutes = ["index.html", "404.html", "_next", "404"];
-        if (!pageRoutes.includes(firstSegment) && !firstSegment.includes(".")) {
-          return `/${firstSegment}`;
-        }
-      }
-      
-      // If we're at root or index, try to detect from the HTML base tag
-      if (typeof document !== "undefined") {
-        const baseTag = document.querySelector("base");
-        if (baseTag && baseTag.getAttribute("href")) {
-          const baseHref = baseTag.getAttribute("href") || "";
-          if (baseHref && baseHref !== "/") {
-            return baseHref.endsWith("/") ? baseHref.slice(0, -1) : baseHref;
-          }
-        }
-      }
-      
-      // Default fallback for portfolio repository
-      return "/portfolio";
+
+    if (!hostname.includes("github.io")) {
+      return "";
     }
-    
-    // For local development, check pathname
+
+    const pathname = window.location.pathname;
     const pathSegments = pathname.split("/").filter(Boolean);
+
     if (pathSegments.length > 0) {
       const firstSegment = pathSegments[0];
-      if (firstSegment && firstSegment !== "index.html" && !firstSegment.startsWith("_") && !firstSegment.includes(".")) {
+      const reserved = ["index.html", "404.html", "_next", "404", "projects"];
+      if (!reserved.includes(firstSegment) && !firstSegment.includes(".")) {
         return `/${firstSegment}`;
       }
     }
-  } catch (error) {
-    // Fallback if any error occurs
-    console.warn("Error detecting basePath:", error);
+
+    if (typeof document !== "undefined") {
+      const baseTag = document.querySelector("base");
+      const baseHref = baseTag?.getAttribute("href") ?? "";
+      if (baseHref && baseHref !== "/") {
+        return baseHref.endsWith("/") ? baseHref.slice(0, -1) : baseHref;
+      }
+    }
+
     return "/portfolio";
+  } catch (error) {
+    console.warn("Error detecting basePath:", error);
+    return "";
   }
-  
-  return "";
 }
 
 /**
- * Get image path with basePath prepended if needed
- * @param imagePath - Path to image (e.g., "/images/logo.png")
- * @returns Full path with basePath if needed
+ * Resolve a public asset path with the deployment base path when needed.
  */
-export function getImagePath(imagePath: string): string {
-  // Only process on client-side
-  if (typeof window === "undefined") {
-    return imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+/**
+ * Extract a YouTube video ID from youtu.be, watch, embed, or shorts URLs.
+ */
+export function getYouTubeVideoId(url: string): string | null {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace(/^www\./, "");
+
+    if (host === "youtu.be") {
+      const id = parsed.pathname.slice(1).split("/")[0];
+      return id || null;
+    }
+
+    if (host === "youtube.com" || host === "m.youtube.com") {
+      if (parsed.pathname === "/watch") {
+        return parsed.searchParams.get("v");
+      }
+      const segments = parsed.pathname.split("/").filter(Boolean);
+      if (segments[0] === "embed" || segments[0] === "shorts") {
+        return segments[1] ?? null;
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
   }
-  
-  const basePath = getBasePath();
-  // Ensure imagePath starts with /
-  const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
-  
-  // If we have a basePath, prepend it
-  if (basePath) {
-    // Remove trailing slash from basePath if present, and ensure cleanPath doesn't have leading issues
-    const normalizedBasePath = basePath.endsWith("/") ? basePath.slice(0, -1) : basePath;
-    return `${normalizedBasePath}${cleanPath}`;
-  }
-  
-  return cleanPath;
 }
 
+export function getImagePath(imagePath: string): string {
+  const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+  const base = getBasePath();
+
+  if (!base) {
+    return cleanPath;
+  }
+
+  const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
+  return `${normalizedBase}${cleanPath}`;
+}

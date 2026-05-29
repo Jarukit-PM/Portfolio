@@ -1,0 +1,75 @@
+{
+  "my-portfolio": {
+    "overview": "This site is the portfolio you're browsing — a static Next.js app with App Router, Framer Motion, and Three.js. I use it to present projects, skills, experience, and a downloadable resume, with smooth section animations and a dark zinc theme with red accents. It deploys to GitHub Pages with an optional `/portfolio` base path.",
+    "highlights": [
+      "App Router layout with reusable sections for hero, projects, skills, experience, education, and contact",
+      "Framer Motion for scroll-linked and hover animations across cards and navigation",
+      "Three.js / React Three Fiber for immersive 3D visuals in the hero",
+      "JSON-driven content in `data/` for projects and skills — easy to extend without touching layout code",
+      "Static export (`output: 'export'`) for GitHub Pages, with `getImagePath()` handling basePath-aware assets",
+      "Resume download from `public/resume/` and responsive layout from mobile through desktop"
+    ],
+    "role": "Sole developer — designed the information architecture, built all UI components, wired data files, configured static export and GitHub Pages deployment."
+  },
+  "figure-shop": {
+    "overview": "Figure Shop is a full-stack marketplace for buying and selling collectible figures. I split the system into a Node.js/Express REST API backed by MongoDB and an EJS storefront/admin dashboard that consumes those APIs through Axios — covering catalog CRUD, image uploads, discounts, carts, orders, payments, and analytics.",
+    "highlights": [
+      "Session-based authentication with bcrypt hashing and username availability checks",
+      "Product catalog with category tagging, Multer image uploads (stored as base64 in MongoDB), and discount scheduling",
+      "Shopping cart, order, payment method/type, and address endpoints for the full checkout pipeline",
+      "Analytics routes aggregating best-selling categories and per-user spending",
+      "Admin EJS views for product/discount CRUD plus customer shop, product detail, cart, and order tracking",
+      "Docker Compose option to run MariaDB seed, backend, and frontend together without local Node/MySQL setup"
+    ],
+    "role": "Full-stack developer — architected API contracts, implemented backend controllers/routers and frontend Axios integration, and documented deployment with Docker Compose."
+  },
+  "asal": {
+    "overview": "Another Story Another Legacy (ASAL) is an online TTRPG platform built for the \"new normal\" — when in-person tabletop sessions were hard to arrange. Our team recreated the D&D-style experience in Unity so players can create characters, roll dice, fight, chat, and adventure together in real time, with Firebase handling auth and live game state.",
+    "highlights": [
+      "Character creation with customizable class, race, and abilities",
+      "Virtual dice rolling and a combat system for strategic battles",
+      "Story design tools for Dungeon Masters to craft custom maps and scenarios",
+      "Email/password sign-in and registration via Firebase Authentication",
+      "Realtime Database persistence for characters, inventory, and custom maps",
+      "Multiplayer, in-game chat, and game log for collaborative sessions",
+      "Shipped as a Windows PC build (.exe) for an optimized desktop experience"
+    ],
+    "role": "Backend-focused contributor (Jarukit Pan-Iam, 65070501006) — designed Firebase Realtime Database schemas for characters, inventories, and maps; built C# services syncing gameplay data and secure account flows so DMs and players could collaborate live."
+  },
+  "wifi-authentication-attack": {
+    "overview": "This cybersecurity mini project simulates real-world Wi-Fi attack workflows in a controlled lab — WPA/WPA2 handshake capture, deauthentication, Hashcat cracking, and an Evil Twin captive portal — packaged behind an interactive Bash menu on Kali Linux (VMware) with a USB monitor-mode adapter.",
+    "highlights": [
+      "Interactive `wifi_attack.sh` menu for adapter setup, monitor mode, scanning, and attack workflows",
+      "Handshake capture locked to a target AP and channel, with `.cap` → `.22000` conversion for Hashcat",
+      "Deauthentication via `aireplay-ng` (targeted) or `mdk4` (broadcast) to force client reconnects",
+      "Cracking pipelines: Rockyou, custom wordlists, rule-based (`best64.rule`), and mask patterns",
+      "Evil Twin stack: `hostapd` fake AP, `dnsmasq` DHCP/DNS redirect, Flask captive portal on port 80",
+      "Credential logging to `credentials.txt` for lab analysis and hardening discussion"
+    ],
+    "role": "Sole developer — implemented Bash orchestration, Flask captive portal templates, and documented the virtual lab setup (Kali on VMware, TP-Link Archer T2U Plus in monitor mode).",
+    "disclaimer": "For educational and research purposes only. Do not use on networks you do not own or lack explicit permission to test. You are solely responsible for any misuse."
+  },
+  "pacman-fpga": {
+    "overview": "Pacman FPGA is a complete Pac-Man–style game implemented in Verilog for Xilinx Artix-7 boards (tested on Digilent Basys 3). The design drives 640×480@60 Hz VGA output, animates Pac-Man and two ghosts, manages collectible scoring and heart-based lives, and includes a Vivado project ready for bitstream generation.",
+    "highlights": [
+      "640×480 VGA pipeline with background ROM, walls, layered sprites, and compositor priority",
+      "Pac-Man motion FSM with wall avoidance, direction-dependent sprites, and post-hit ghost animation",
+      "Two autonomous ghosts with independent speed offsets and collision detection against Pac-Man",
+      "Collectible stars respawning across eight maze regions with a 4-digit score counter",
+      "Game state machine: start → play → hit (invincibility window) → game over → restart via `start_btn`",
+      "Optional seven-segment score display; shipped bitstream from Vivado 2015.4 included in the repo"
+    ],
+    "role": "Hardware developer — designed top-level integration, sprite ROMs, FSMs (`Pacman_control`, ghosts, stars, hearts), and maze collision logic; validated on Basys 3 with push-button controls."
+  },
+  "moded": {
+    "overview": "ModEd is the capstone full-stack platform for CPE494 at KMUTT — a large collaborative codebase where 30+ students shipped modules on a shared Go backend, JavaScript UI, PostgreSQL, and VS Code Dev Container workflow. I owned the HR module: employee data model, leave-approval flows, and integration hooks into the rest of the system.",
+    "highlights": [
+      "HR module ownership: employee entities, leave requests, and approval workflows wired to shared APIs",
+      "Developed inside the team Dev Container (Docker, Go, Postgres pre-installed) for consistent environments",
+      "Followed team git workflow: commit → `git pull --rebase` → resolve conflicts → push",
+      "Integrated with the broader ModEd architecture referenced from the OOAD2568 course resources",
+      "Collaborated at scale (~30+ contributors) on a monorepo-style fullstack codebase"
+    ],
+    "role": "HR module lead — designed the employee/leave domain model, implemented backend and UI integration points, and kept the module aligned with shared Dev Container and API conventions."
+  }
+}

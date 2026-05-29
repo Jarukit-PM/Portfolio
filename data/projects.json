@@ -1,67 +1,10 @@
 [
   {
-    "id": 1,
-    "title": "My Portfolio",
-    "description": "A highly animated and modern portfolio website built with Next.js, TypeScript, and Framer Motion. Features smooth animations, responsive design, and interactive sections to showcase projects, skills, and experience.",
-    "image": "/images/Image_profolio.png",
-    "tags": ["React", "Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
-    "link": "https://jarukit-pm.github.io/portfolio/",
-    "github": "https://github.com/Jarukit-PM/portfolio"
-  },
-  {
-    "id": 2,
-    "title": "Figure Shop",
-    "description": "Architected a buy-and-sell marketplace for collectible figures with an Express REST API that handles catalog CRUD, image uploads, discounts, carts, orders, and payment metadata while running analytics aggregations for best-selling categories and customer spending; the EJS frontend consumes the APIs via Axios to deliver an admin-ready dashboard and storefront.",
-    "image": "/images/project/figureShop.png",
-    "tags": ["Node.js", "Express", "MongoDB", "Multer", "EJS", "Axios"],
-    "link": "https://github.com/Jarukit-PM/Final_Project_Database_SQL",
-    "github": "https://github.com/Jarukit-PM/Final_Project_Database_SQL"
-  },
-  {
-    "id": 3,
-    "title": "Another Story Another Legacy (ASAL)",
-    "description": "Owned the online TTRPG platform’s backend by designing Firebase Realtime Database schemas for characters, inventories, and maps while building C# services that sync gameplay data, and enforce secure account authentication so Dungeon Masters and players can collaborate live.",
-    "image": "/images/project/ASAL.png",
-    "tags": [
-      "Unity",
-      "C#",
-      "Firebase Realtime DB",
-      "Firebase Auth",
-      "Backend services"
-    ],
-    "link": "https://github.com/Jarukit-PM/Dnd_Game",
-    "github": "https://github.com/Jarukit-PM/Dnd_Game"
-  },
-  {
-    "id": 4,
-    "title": "Wi-Fi Authentication Attack Simulator",
-    "description": "Built an educational red-team toolkit that automates WPA/WPA2 handshake capture, deauthentication workflows, Hashcat cracking pipelines, and Evil Twin captive portals with a Flask credential collector, focusing on ethical Wi-Fi security research and hardening recommendations.",
-    "image": "/images/project/wi-fi-attack.png",
-    "tags": ["Kali Linux", "Bash", "Aircrack-ng", "Hashcat", "Flask", "Python"],
-    "link": "https://github.com/Jarukit-PM/Wifi-Authentication-Attack",
-    "github": "https://github.com/Jarukit-PM/Wifi-Authentication-Attack"
-  },
-  {
-    "id": 5,
-    "title": "Pacman FPGA",
-    "description": "Engineered a Pac-Man style hardware game entirely in Verilog for Xilinx Artix-7 boards, featuring a 640×480 VGA pipeline, Pac-Man and ghost FSMs, collectible-driven scoring, heart-based lives, and a Vivado project ready for bitstream generation.",
-    "image": "/images/project/Pacman.png",
-    "tags": ["Verilog", "FPGA", "Vivado", "Hardware"],
-    "link": "https://github.com/Jarukit-PM/Pacman_FPGA",
-    "github": "https://github.com/Jarukit-PM/Pacman_FPGA"
-  },
-  {
-    "id": 6,
-    "title": "CPE494 Fullstack · ModEd",
-    "description": "Owned the HR module for ModEd in the CPE494 Fullstack program—designing the employee data model, leave-approval workflows, and integration hooks—while building inside the shared VS Code Dev Container so Docker, Go services, and the JavaScript UI could stay in sync for 30+ collaborators.",
-    "image": "/images/project/CPE494.png",
-    "tags": ["Go", "JavaScript", "PostgreSQL", "Docker", "Dev Container", "HR Module"],
-    "link": "https://github.com/Thanaphol47825/cpe494-fullstack-2025",
-    "github": "https://github.com/Thanaphol47825/cpe494-fullstack-2025"
-  },
-  {
     "id": 7,
+    "slug": "spaceshare",
     "title": "SpaceShare",
+    "stars": 5,
+    "image": "/images/project/SpaceShare_cover.png",
     "description": "Led product delivery for SpaceShare, a pre-launch two-sided logistics marketplace connecting B2B shippers with inter-province drivers on planned routes. Owned end-to-end project scope and feature design for the driver-selected delivery workflow, aligned stakeholders on requirements and constraints, translated business context into clear specs/user flows, prioritized roadmap and backlog, and coordinated execution across API, mobile (driver), and web (company/admin) surfaces.",
     "tags": [
       "Project Management",
@@ -74,6 +17,78 @@
       "TypeScript",
       "Tailwind CSS"
     ]
+  },
+  {
+    "id": 5,
+    "slug": "pacman-fpga",
+    "title": "Pacman FPGA",
+    "stars": 5,
+    "description": "Engineered a Pac-Man style hardware game entirely in Verilog for Xilinx Artix-7 boards, featuring a 640×480 VGA pipeline, Pac-Man and ghost FSMs, collectible-driven scoring, heart-based lives, and a Vivado project ready for bitstream generation.",
+    "image": "/images/project/Pacman.png",
+    "tags": ["Verilog", "FPGA", "Vivado", "Hardware"],
+    "link": "https://github.com/Jarukit-PM/Pacman_FPGA",
+    "github": "https://github.com/Jarukit-PM/Pacman_FPGA",
+    "demo": "https://youtu.be/MjYjfHu0_5E?si=2Cit5r1ln8TGpz6J"
+  },
+  {
+    "id": 4,
+    "slug": "wifi-authentication-attack",
+    "title": "Wi-Fi Authentication Attack Simulator",
+    "stars": 4,
+    "description": "Built an educational red-team toolkit that automates WPA/WPA2 handshake capture, deauthentication workflows, Hashcat cracking pipelines, and Evil Twin captive portals with a Flask credential collector, focusing on ethical Wi-Fi security research and hardening recommendations.",
+    "image": "/images/project/wi-fi-attack.png",
+    "tags": ["Kali Linux", "Bash", "Aircrack-ng", "Hashcat", "Flask", "Python"],
+    "link": "https://github.com/Jarukit-PM/Wifi-Authentication-Attack",
+    "github": "https://github.com/Jarukit-PM/Wifi-Authentication-Attack"
+  },
+  {
+    "id": 3,
+    "slug": "asal",
+    "title": "Another Story Another Legacy (ASAL)",
+    "stars": 4,
+    "description": "Owned the online TTRPG platform's backend by designing Firebase Realtime Database schemas for characters, inventories, and maps while building C# services that sync gameplay data, and enforce secure account authentication so Dungeon Masters and players can collaborate live.",
+    "image": "/images/project/ASAL.png",
+    "tags": [
+      "Unity",
+      "C#",
+      "Firebase Realtime DB",
+      "Firebase Auth",
+      "Backend services"
+    ],
+    "link": "https://github.com/Jarukit-PM/Dnd_Game",
+    "github": "https://github.com/Jarukit-PM/Dnd_Game"
+  },
+  {
+    "id": 2,
+    "slug": "figure-shop",
+    "title": "Figure Shop",
+    "stars": 3,
+    "description": "Architected a buy-and-sell marketplace for collectible figures with an Express REST API that handles catalog CRUD, image uploads, discounts, carts, orders, and payment metadata while running analytics aggregations for best-selling categories and customer spending; the EJS frontend consumes the APIs via Axios to deliver an admin-ready dashboard and storefront.",
+    "image": "/images/project/figureShop.png",
+    "tags": ["Node.js", "Express", "MongoDB", "Multer", "EJS", "Axios"],
+    "link": "https://github.com/Jarukit-PM/Figure-Shop",
+    "github": "https://github.com/Jarukit-PM/Figure-Shop"
+  },
+  {
+    "id": 6,
+    "slug": "moded",
+    "title": "CPE494 Fullstack · ModEd",
+    "stars": 2,
+    "description": "Owned the HR module for ModEd in the CPE494 Fullstack program—designing the employee data model, leave-approval workflows, and integration hooks—while building inside the shared VS Code Dev Container so Docker, Go services, and the JavaScript UI could stay in sync for 30+ collaborators.",
+    "image": "/images/project/CPE494.png",
+    "tags": ["Go", "JavaScript", "PostgreSQL", "Docker", "Dev Container", "HR Module"],
+    "link": "https://github.com/Thanaphol47825/cpe494-fullstack-2025",
+    "github": "https://github.com/Thanaphol47825/cpe494-fullstack-2025"
+  },
+  {
+    "id": 1,
+    "slug": "my-portfolio",
+    "title": "My Portfolio",
+    "stars": 2,
+    "description": "A highly animated and modern portfolio website built with Next.js, TypeScript, and Framer Motion. Features smooth animations, responsive design, and interactive sections to showcase projects, skills, and experience.",
+    "image": "/images/Image_profolio.png",
+    "tags": ["React", "Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
+    "link": "https://jarukit-pm.github.io/Portfolio/",
+    "github": "https://github.com/Jarukit-PM/Portfolio"
   }
 ]
-
