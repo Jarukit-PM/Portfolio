@@ -1,6 +1,9 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import {
   FiDownload,
   FiLinkedin,
@@ -11,8 +14,13 @@ import {
   FiTool,
   FiZap,
 } from "react-icons/fi";
-import { SiNextdotjs, SiTypescript, SiFramer } from "react-icons/si";
-import Link from "next/link";
+import { tagColors, tagIcons } from "@/app/lib/project-tags";
+import { getProjectBySlug } from "@/app/lib/projects";
+import { ProjectStars } from "@/app/components/ProjectStars";
+import { getImagePath } from "@/app/lib/utils";
+
+const HERO_FEATURED_SLUG = "spaceshare";
+const HERO_FEATURED_TAGS = ["Go", "Next.js", "React Native"];
 
 const container: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -65,6 +73,17 @@ const glowOrb: Variants = {
 export function HeroSection() {
   const name = "Jarukit Pan-Iam";
   const resumeHref = "/resume/jarukit-pan-iam-resume.pdf";
+  const featuredProject = getProjectBySlug(HERO_FEATURED_SLUG);
+  const [coverError, setCoverError] = useState(false);
+
+  const coverSrc =
+    coverError || !featuredProject?.image
+      ? getImagePath("/github-cover.svg")
+      : getImagePath(featuredProject.image);
+
+  const heroTags =
+    featuredProject?.tags?.filter((tag) => HERO_FEATURED_TAGS.includes(tag)) ??
+    HERO_FEATURED_TAGS;
 
   return (
     <section id="about" className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-3xl border border-zinc-800/40 bg-linear-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 shadow-[0_0_60px_rgba(0,0,0,0.7)] sm:px-10 lg:px-16">
@@ -278,74 +297,99 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          <motion.div
-            className="relative h-72 overflow-hidden rounded-[1.6rem] border border-white/12 bg-zinc-950/80 p-5 text-sm text-zinc-100 shadow-[0_24px_80px_rgba(0,0,0,0.4)]"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-          >
-            <motion.div
-              className="pointer-events-none absolute inset-0 opacity-40"
-              animate={{
-                background: [
-                  "radial-gradient(circle at 0% 0%, rgba(239,68,68,0.45), transparent 55%)",
-                  "radial-gradient(circle at 80% 20%, rgba(255,255,255,0.25), transparent 60%)",
-                  "radial-gradient(circle at 0% 0%, rgba(239,68,68,0.45), transparent 55%)",
-                ],
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <div className="relative flex h-full flex-col justify-between">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-zinc-300">
-                  <span>Recent Project</span>
-                  <span className="rounded-full border border-red-400/50 bg-red-500/10 px-2 py-0.5 text-[10px] font-semibold text-red-200 shadow-[0_0_18px_rgba(239,68,68,0.4)]">
-                    Live
-                  </span>
-                </div>
-
-                <div className="space-y-1">
-                  <p className="text-base font-semibold text-zinc-50">My Portfolio</p>
-                  <p className="text-xs text-zinc-300/90">
-                    A motion-rich Next.js experience showcasing projects, skills, and animated storytelling with custom scroll interactions.
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2 text-[11px] text-zinc-200">
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1">
-                    <SiNextdotjs className="h-3.5 w-3.5 text-zinc-100" />
-                    Next.js
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1">
-                    <SiTypescript className="h-3.5 w-3.5 text-sky-300" />
-                    TypeScript
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1">
-                    <SiFramer className="h-3.5 w-3.5 text-pink-300" />
-                    Framer Motion
-                  </span>
-                </div>
-              </div>
-
+          {featuredProject && (
+            <Link
+              href={`/projects/${featuredProject.slug}`}
+              className="group block h-72"
+            >
               <motion.div
-                className="flex items-center justify-between pt-2 text-xs text-zinc-200"
-                animate={{ opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 4, repeat: Infinity }}
+                className="relative h-full overflow-hidden rounded-[1.6rem] border border-white/12 bg-zinc-950/80 text-sm text-zinc-100 shadow-[0_24px_80px_rgba(0,0,0,0.4)] transition hover:border-red-400/40"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
               >
-                <span className="font-mono text-[11px] text-zinc-400">
-                  v3.0 · Responsive · 2025
-                </span>
-                <Link
-                  href="https://github.com/Jarukit-PM/Portfolio"
-                  target="_blank"
-                  className="inline-flex items-center gap-1 rounded-full border border-white/20 px-3 py-1 text-[11px] font-semibold text-zinc-50 transition hover:border-red-400 hover:text-red-300"
-                >
-                  View source
-                  <FiExternalLink className="h-3.5 w-3.5" />
-                </Link>
+                <motion.div
+                  className="pointer-events-none absolute inset-0 opacity-40"
+                  animate={{
+                    background: [
+                      "radial-gradient(circle at 0% 0%, rgba(239,68,68,0.45), transparent 55%)",
+                      "radial-gradient(circle at 80% 20%, rgba(255,255,255,0.25), transparent 60%)",
+                      "radial-gradient(circle at 0% 0%, rgba(239,68,68,0.45), transparent 55%)",
+                    ],
+                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <div className="relative flex h-full flex-col">
+                  <div className="relative h-24 w-full shrink-0 overflow-hidden">
+                    <Image
+                      src={coverSrc}
+                      alt={featuredProject.title}
+                      fill
+                      className="object-cover object-center transition duration-500 group-hover:scale-105"
+                      unoptimized
+                      onError={() => setCoverError(true)}
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+                  </div>
+
+                  <div className="flex flex-1 flex-col justify-between p-4 pt-3">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-zinc-300">
+                        <span>Featured Project</span>
+                        <span className="rounded-full border border-red-400/50 bg-red-500/10 px-2 py-0.5 text-[10px] font-semibold text-red-200 shadow-[0_0_18px_rgba(239,68,68,0.4)]">
+                          Live
+                        </span>
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="text-base font-semibold text-zinc-50">
+                            {featuredProject.title}
+                          </p>
+                          <ProjectStars stars={featuredProject.stars} />
+                        </div>
+                        <p className="line-clamp-2 text-xs text-zinc-300/90">
+                          {featuredProject.description}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 text-[11px] text-zinc-200">
+                        {heroTags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1"
+                          >
+                            {tagIcons[tag] && (
+                              <span
+                                className={`text-xs ${tagColors[tag] ?? "text-zinc-300"}`}
+                              >
+                                {tagIcons[tag]}
+                              </span>
+                            )}
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <motion.div
+                      className="flex items-center justify-between pt-2 text-xs text-zinc-200"
+                      animate={{ opacity: [0.7, 1, 0.7] }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    >
+                      <span className="font-mono text-[11px] text-zinc-400">
+                        {featuredProject.stars} stars · Logistics
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-white/20 px-3 py-1 text-[11px] font-semibold text-zinc-50 transition group-hover:border-red-400 group-hover:text-red-300">
+                        View project
+                        <FiExternalLink className="h-3.5 w-3.5" />
+                      </span>
+                    </motion.div>
+                  </div>
+                </div>
               </motion.div>
-            </div>
-          </motion.div>
+            </Link>
+          )}
         </motion.div>
       </motion.div>
     </section>

@@ -1,8 +1,13 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  type Variants,
+} from "framer-motion";
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
   FiAlertTriangle,
   FiArrowUpRight,
@@ -32,8 +37,18 @@ type ProjectDetailProps = {
   detail: ProjectDetailContent;
 };
 
+/** Content stays readable if scroll/viewport reveal never runs. */
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 1, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 80, damping: 18 },
+  },
+};
+
+const staggerChild: Variants = {
+  hidden: { opacity: 1, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
@@ -132,17 +147,37 @@ function AnimatedSection({
   className?: string;
   reduceMotion: boolean | null;
 }) {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.05 });
+  const [revealedOnMount, setRevealedOnMount] = useState(false);
+
+  useLayoutEffect(() => {
+    if (reduceMotion) return;
+    const el = ref.current;
+    if (!el) return;
+    const { top, bottom } = el.getBoundingClientRect();
+    if (top < window.innerHeight && bottom > 0) {
+      setRevealedOnMount(true);
+    }
+  }, [reduceMotion]);
+
+  const isRevealed = isInView || revealedOnMount;
+
   if (reduceMotion) {
-    return <section className={className}>{children}</section>;
+    return (
+      <section ref={ref} className={className}>
+        {children}
+      </section>
+    );
   }
 
   return (
     <motion.section
+      ref={ref}
       className={className}
       variants={fadeUp}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      animate={isRevealed ? "visible" : "hidden"}
     >
       {children}
     </motion.section>
@@ -365,14 +400,11 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
           <motion.ul
             className="grid gap-5 sm:grid-cols-2 sm:gap-6"
             variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
           >
             {detail.highlights.map((item, index) => (
               <motion.li
                 key={highlightKey(item, index)}
-                variants={fadeUp}
+                variants={staggerChild}
                 className={`${featureCardClassName} ${featureCardInteractiveClassName}`}
               >
                 <FeatureHighlightCard item={item} index={index} />
