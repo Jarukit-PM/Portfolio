@@ -8,6 +8,7 @@ import type { Project } from "@/app/lib/projects";
 import { tagColors, tagIcons } from "@/app/lib/project-tags";
 import { ProjectStars } from "@/app/components/ProjectStars";
 import { getImagePath } from "@/app/lib/utils";
+import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -28,6 +29,7 @@ export function ProjectCard({
   className = "",
   animate = true,
 }: ProjectCardProps) {
+  const { t } = useLanguage();
   const [imageError, setImageError] = useState(false);
 
   const imageSrc =
@@ -86,7 +88,7 @@ export function ProjectCard({
           )}
 
           <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-[0.16em] text-red-300">
-            View details
+            {t.projects.viewDetails}
           </span>
         </div>
       </div>

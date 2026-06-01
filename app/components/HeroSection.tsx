@@ -18,6 +18,7 @@ import { tagColors, tagIcons } from "@/app/lib/project-tags";
 import { getProjectBySlug } from "@/app/lib/projects";
 import { ProjectStars } from "@/app/components/ProjectStars";
 import { getImagePath } from "@/app/lib/utils";
+import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 const HERO_FEATURED_SLUG = "spaceshare";
 const HERO_FEATURED_TAGS = ["Go", "Next.js", "React Native"];
@@ -71,6 +72,7 @@ const glowOrb: Variants = {
 };
 
 export function HeroSection() {
+  const { t } = useLanguage();
   const name = "Jarukit Pan-Iam";
   const resumeHref = "/resume/jarukit-pan-iam-resume.pdf";
   const featuredProject = getProjectBySlug(HERO_FEATURED_SLUG);
@@ -115,7 +117,7 @@ export function HeroSection() {
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.9)]" />
-            Available for opportunities
+            {t.hero.available}
           </motion.div>
 
           <motion.div
@@ -129,7 +131,7 @@ export function HeroSection() {
               className="text-balance text-4xl font-semibold tracking-tight text-zinc-50 sm:text-5xl lg:text-6xl"
             >
               <span className="block text-zinc-400 text-base sm:text-lg">
-                Hi, I&apos;m
+                {t.hero.greeting}
               </span>
               <span className="bg-linear-to-r from-zinc-50 via-red-200 to-red-500 bg-clip-text text-transparent">
                 {name}
@@ -140,10 +142,7 @@ export function HeroSection() {
               variants={titleChild}
               className="max-w-xl text-sm sm:text-base text-zinc-300"
             >
-              Frontend Developer · Fullstack Developer · Software Engineer.
-              Focused on shipping end-to-end products that pair solid UX with
-              well-structured REST APIs, reliable databases, and deployment-ready
-              architecture.
+              {t.hero.tagline}
             </motion.p>
 
             <motion.div
@@ -151,13 +150,13 @@ export function HeroSection() {
               className="flex flex-wrap items-center gap-3 text-xs font-medium text-zinc-300"
             >
               <span className="rounded-full border border-red-500/40 bg-red-500/10 px-3 py-1">
-                Angular &amp; .NET experience
+                {t.hero.badgeAngularDotnet}
               </span>
               <span className="rounded-full border border-red-300/50 bg-red-500/5 px-3 py-1">
-                CI/CD &amp; SQL Server
+                {t.hero.badgeCicdSql}
               </span>
               <span className="rounded-full border border-zinc-500/60 bg-zinc-800/80 px-3 py-1">
-                MBA &amp; Computer Engineering
+                {t.hero.badgeMbaCompeng}
               </span>
             </motion.div>
           </motion.div>
@@ -171,7 +170,7 @@ export function HeroSection() {
               className="group inline-flex items-center gap-2 rounded-full bg-zinc-50 px-6 py-3 text-sm font-semibold text-zinc-900 shadow-lg shadow-red-500/30 transition hover:bg-red-500 hover:text-zinc-50"
             >
               <FiDownload className="h-4 w-4 transition group-hover:-translate-y-0.5" />
-              Download Resume
+              {t.hero.downloadResume}
             </Link>
 
             <div className="flex items-center gap-3 text-zinc-300">
@@ -180,7 +179,7 @@ export function HeroSection() {
                 target="_blank"
                 className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-100 transition hover:border-red-400 hover:text-red-300"
               >
-                Resume
+                {t.hero.resume}
                 <FiExternalLink className="h-3.5 w-3.5" />
               </Link>
               <Link
@@ -257,10 +256,10 @@ export function HeroSection() {
                 <div className="flex items-center justify-between gap-4">
                   <div className="space-y-1">
                     <p className="text-xs uppercase tracking-[0.25em] text-zinc-200">
-                      Recent Experience
+                      {t.hero.recentExperience}
                     </p>
                     <p className="text-base font-semibold text-zinc-50">
-                      Frontend &amp; Fullstack Experiences
+                      {t.hero.recentExperienceTitle}
                     </p>
                   </div>
                   <div className="space-y-2 text-[11px]">
@@ -276,14 +275,14 @@ export function HeroSection() {
                 </div>
 
                 <p className="text-xs text-zinc-100/80 leading-relaxed">
-                  Completed a two-month internship @ IRPC Public Company Limited, leading end-to-end delivery of internal web applications—from requirements and database design through deployment into production—so stakeholders could use the tools immediately in their work.
+                  {t.hero.internSummary}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-2 text-[11px] text-zinc-100">
                 <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-black/40 px-2.5 py-1">
                   <FiTool className="h-3.5 w-3.5 text-zinc-200" />
-                  Debugging &amp; Refactoring
+                  {t.hero.chipDebugging}
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full border border-red-400/40 bg-red-500/15 px-2.5 py-1">
                   <FiZap className="h-3.5 w-3.5 text-red-200" />
@@ -291,7 +290,7 @@ export function HeroSection() {
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/10 px-2.5 py-1">
                   <FiCode className="h-3.5 w-3.5 text-emerald-200" />
-                  Problem Solving
+                  {t.hero.chipProblemSolving}
                 </span>
               </div>
             </div>
@@ -335,9 +334,9 @@ export function HeroSection() {
                   <div className="flex flex-1 flex-col justify-between p-4 pt-3">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-zinc-300">
-                        <span>Featured Project</span>
+                        <span>{t.hero.featuredProject}</span>
                         <span className="rounded-full border border-red-400/50 bg-red-500/10 px-2 py-0.5 text-[10px] font-semibold text-red-200 shadow-[0_0_18px_rgba(239,68,68,0.4)]">
-                          Live
+                          {t.hero.live}
                         </span>
                       </div>
 
@@ -378,10 +377,10 @@ export function HeroSection() {
                       transition={{ duration: 4, repeat: Infinity }}
                     >
                       <span className="font-mono text-[11px] text-zinc-400">
-                        {featuredProject.stars} stars · Logistics
+                        {t.hero.starsLogistics(featuredProject.stars)}
                       </span>
                       <span className="inline-flex items-center gap-1 rounded-full border border-white/20 px-3 py-1 text-[11px] font-semibold text-zinc-50 transition group-hover:border-red-400 group-hover:text-red-300">
-                        View project
+                        {t.hero.viewProject}
                         <FiExternalLink className="h-3.5 w-3.5" />
                       </span>
                     </motion.div>

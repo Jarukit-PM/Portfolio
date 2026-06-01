@@ -46,6 +46,7 @@ import { isStructuredHighlight } from "@/app/lib/projects";
 import { tagColors, tagIcons } from "@/app/lib/project-tags";
 import { ProjectStars } from "@/app/components/ProjectStars";
 import { getImagePath, getYouTubeVideoId } from "@/app/lib/utils";
+import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 type ProjectDetailProps = {
   project: Project;
@@ -242,6 +243,7 @@ function ScreenshotLightbox({
   onIndexChange: (index: number) => void;
   reduceMotion: boolean | null;
 }) {
+  const { t } = useLanguage();
   const shot = shots[index];
   const hasMultiple = shots.length > 1;
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -287,7 +289,7 @@ function ScreenshotLightbox({
         type="button"
         className="absolute inset-0 bg-zinc-950/90 backdrop-blur-sm"
         onClick={onClose}
-        aria-label="Close full size image"
+        aria-label={t.projectDetail.closeImage}
       />
       <div className="relative z-10 flex min-h-0 flex-1 flex-col p-4 sm:p-6">
         <div className="flex shrink-0 items-center justify-between gap-3 pb-3">
@@ -305,7 +307,7 @@ function ScreenshotLightbox({
               type="button"
               onClick={onClose}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-zinc-50"
-              aria-label="Close"
+              aria-label={t.projectDetail.close}
             >
               <FiX className="h-5 w-5" aria-hidden />
             </button>
@@ -321,7 +323,7 @@ function ScreenshotLightbox({
                 goPrev();
               }}
               className="absolute left-0 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800 sm:left-2"
-              aria-label="Previous screenshot"
+              aria-label={t.projectDetail.previousScreenshot}
             >
               <FiChevronLeft className="h-6 w-6" aria-hidden />
             </button>
@@ -353,13 +355,13 @@ function ScreenshotLightbox({
         {hasMultiple ? (
           <p className="shrink-0 pt-3 text-center text-xs text-zinc-500">
             <span className="sm:hidden">
-              {index + 1} / {shots.length} ·{" "}
+              {t.projectDetail.counter(index + 1, shots.length)}
             </span>
-            Arrow keys to navigate · Esc to close
+            {t.projectDetail.navHint}
           </p>
         ) : (
           <p className="shrink-0 pt-3 text-center text-xs text-zinc-500">
-            Esc to close
+            {t.projectDetail.escHint}
           </p>
         )}
       </div>
@@ -408,6 +410,7 @@ function ScreenshotCard({
   platform?: ProjectScreenshotGroup["platform"];
   onOpen: () => void;
 }) {
+  const { t } = useLanguage();
   const isMobile = platform === "mobile";
   const label = shot.caption ?? shot.alt;
 
@@ -421,7 +424,7 @@ function ScreenshotCard({
         type="button"
         onClick={onOpen}
         className="flex w-full flex-col text-left transition hover:border-red-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
-        aria-label={`View full size: ${label}`}
+        aria-label={t.projectDetail.viewFullSizeLabel(label)}
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-linear-to-r from-transparent via-red-500/40 to-transparent opacity-0 transition group-hover:opacity-100" />
         <div
@@ -444,7 +447,7 @@ function ScreenshotCard({
           <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-zinc-950/0 transition group-hover:bg-zinc-950/35">
             <span className="flex items-center gap-1.5 rounded-full border border-zinc-600/80 bg-zinc-900/90 px-3 py-1.5 text-xs font-medium text-zinc-100 opacity-0 shadow-lg transition group-hover:opacity-100">
               <FiMaximize2 className="h-3.5 w-3.5" aria-hidden />
-              View full size
+              {t.projectDetail.viewFullSize}
             </span>
           </span>
         </div>
@@ -635,6 +638,7 @@ function FeatureHighlightCard({
 }
 
 export function ProjectDetail({ project, detail }: ProjectDetailProps) {
+  const { t } = useLanguage();
   const reduceMotion = useReducedMotion();
   const imageSrc = project.image
     ? getImagePath(project.image)
@@ -704,7 +708,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
               </span>
               <div className="min-w-0 space-y-1">
                 <p className="text-sm font-semibold text-amber-200">
-                  Educational use only
+                  {t.projectDetail.educationalUseOnly}
                 </p>
                 <p className="text-sm leading-relaxed text-amber-100/85">
                   {detail.disclaimer}
@@ -716,14 +720,14 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
       )}
 
       <AnimatedSection className="space-y-4" reduceMotion={reduceMotion}>
-        <SectionHeading id="overview">Overview</SectionHeading>
+        <SectionHeading id="overview">{t.projectDetail.overview}</SectionHeading>
         <p className="max-w-3xl text-sm leading-relaxed text-zinc-200 sm:text-base sm:leading-7">
           {detail.overview}
         </p>
       </AnimatedSection>
 
       <AnimatedSection className="space-y-5" reduceMotion={reduceMotion}>
-        <SectionHeading id="features">Key features</SectionHeading>
+        <SectionHeading id="features">{t.projectDetail.keyFeatures}</SectionHeading>
         {reduceMotion ? (
           <ul className="grid gap-5 sm:grid-cols-2 sm:gap-6">
             {detail.highlights.map((item, index) => (
@@ -752,7 +756,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
 
       {detail.screenshotGroups && detail.screenshotGroups.length > 0 && (
         <AnimatedSection className="space-y-10" reduceMotion={reduceMotion}>
-          <SectionHeading id="screenshots">Screenshots</SectionHeading>
+          <SectionHeading id="screenshots">{t.projectDetail.screenshots}</SectionHeading>
           <div className="space-y-12">
             {detail.screenshotGroups.map((group) => (
               <ScreenshotGroupSection
@@ -767,7 +771,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
 
       {detail.role && (
         <AnimatedSection className="space-y-4" reduceMotion={reduceMotion}>
-          <SectionHeading id="role">My role</SectionHeading>
+          <SectionHeading id="role">{t.projectDetail.myRole}</SectionHeading>
           <div className="relative overflow-hidden rounded-2xl border border-zinc-800/70 border-l-2 border-l-red-500/50 bg-zinc-900/40 px-5 py-4 sm:px-6 sm:py-5">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-red-500/40 via-transparent to-transparent" />
             <p className="max-w-3xl text-sm leading-relaxed text-zinc-200 sm:text-base sm:leading-7">
@@ -779,7 +783,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
 
       {project.tags && project.tags.length > 0 && (
         <AnimatedSection className="space-y-5" reduceMotion={reduceMotion}>
-          <SectionHeading id="stack">Tech stack</SectionHeading>
+          <SectionHeading id="stack">{t.projectDetail.techStack}</SectionHeading>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <span
@@ -802,7 +806,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
 
       {youtubeVideoId && (
         <AnimatedSection className="space-y-5" reduceMotion={reduceMotion}>
-          <SectionHeading id="demo">Demo</SectionHeading>
+          <SectionHeading id="demo">{t.projectDetail.demo}</SectionHeading>
           <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-zinc-800/70 bg-zinc-900 shadow-[0_16px_48px_-20px_rgba(0,0,0,0.7)]">
             <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-linear-to-r from-transparent via-red-500/60 to-transparent" />
             <iframe
@@ -820,21 +824,21 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
         className="space-y-5 rounded-3xl border border-zinc-800/60 bg-linear-to-br from-zinc-900/50 via-zinc-950/80 to-black/40 p-6 sm:p-8"
         reduceMotion={reduceMotion}
       >
-        <SectionHeading id="links">Links</SectionHeading>
+        <SectionHeading id="links">{t.projectDetail.links}</SectionHeading>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           {project.github && (
             <ExternalLinkButton
               href={project.github}
-              label="View on GitHub"
-              description="Source & docs"
+              label={t.projectDetail.viewOnGithub}
+              description={t.projectDetail.sourceAndDocs}
               icon={<FiGithub className="h-5 w-5" />}
             />
           )}
           {liveUrl && (
             <ExternalLinkButton
               href={liveUrl}
-              label="Live site"
-              description="Open deployment"
+              label={t.projectDetail.liveSite}
+              description={t.projectDetail.openDeployment}
               icon={<FiExternalLink className="h-5 w-5" />}
               variant="accent"
             />
@@ -842,9 +846,15 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
           {project.demo && (
             <ExternalLinkButton
               href={project.demo}
-              label={youtubeVideoId ? "Open on YouTube" : "Watch demo"}
+              label={
+                youtubeVideoId
+                  ? t.projectDetail.openOnYoutube
+                  : t.projectDetail.watchDemo
+              }
               description={
-                youtubeVideoId ? "Embedded above" : "External demo"
+                youtubeVideoId
+                  ? t.projectDetail.embeddedAbove
+                  : t.projectDetail.externalDemo
               }
               icon={<FiPlay className="h-5 w-5" />}
               variant="accent"
@@ -857,6 +867,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
 }
 
 export function ProjectDetailPlaceholder({ project }: { project: Project }) {
+  const { t } = useLanguage();
   const reduceMotion = useReducedMotion();
   const imageSrc = project.image
     ? getImagePath(project.image)
@@ -900,7 +911,7 @@ export function ProjectDetailPlaceholder({ project }: { project: Project }) {
         </p>
       </header>
       <p className="rounded-2xl border border-dashed border-zinc-700/80 bg-zinc-900/30 px-5 py-10 text-center text-sm text-zinc-500">
-        Full case study coming soon.
+        {t.projectDetail.comingSoon}
       </p>
     </Wrapper>
   );
