@@ -6,6 +6,7 @@ import skillsData from "@/data/skills.json";
 import {
   SiAngular,
   SiC,
+  SiClaude,
   SiCplusplus,
   SiDocker,
   SiDotnet,
@@ -19,6 +20,7 @@ import {
   SiMongodb,
   SiNextdotjs,
   SiNodedotjs,
+  SiOpenai,
   SiPostgresql,
   SiReact,
   SiReactquery,
@@ -27,6 +29,19 @@ import {
   SiThreedotjs,
   SiTypescript,
 } from "react-icons/si";
+
+function CursorIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="h-[1em] w-[1em]"
+      aria-hidden
+    >
+      <path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23" />
+    </svg>
+  );
+}
 
 const wrapper: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -83,6 +98,9 @@ const skillIcons: Record<string, ReactNode> = {
   Jenkins: <SiJenkins />,
   "CI/CD": <SiGithub />,
   Docker: <SiDocker />,
+  Cursor: <CursorIcon />,
+  "Claude Code": <SiClaude />,
+  Codex: <SiOpenai />,
 };
 
 const skillColors: Record<string, string> = {
@@ -112,6 +130,9 @@ const skillColors: Record<string, string> = {
   Jenkins: "text-yellow-300",
   "CI/CD": "text-fuchsia-300",
   Docker: "text-sky-400",
+  Cursor: "text-zinc-100",
+  "Claude Code": "text-orange-300",
+  Codex: "text-emerald-300",
 };
 
 export function SkillsSection() {
@@ -120,6 +141,7 @@ export function SkillsSection() {
     { label: "Backend", items: skillsData.backend },
     { label: "Database", items: skillsData.database },
     { label: "Tooling", items: skillsData.tooling },
+    { label: "AI Agents", items: skillsData.aiAgents },
   ];
 
   return (
@@ -137,8 +159,8 @@ export function SkillsSection() {
           Skills
         </h2>
         <p className="mt-1 text-sm text-zinc-400">
-          A mix of frontend, backend, and tooling that supports fullstack
-          development.
+          A mix of frontend, backend, tooling, and AI agents that supports
+          fullstack development.
         </p>
       </motion.div>
 
