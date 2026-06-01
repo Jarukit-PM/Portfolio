@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { motion, type Variants } from "framer-motion";
 import skillsData from "@/data/skills.json";
 import {
+  SiAmazonwebservices,
   SiAngular,
   SiC,
   SiClaude,
@@ -15,6 +16,7 @@ import {
   SiFramer,
   SiGithub,
   SiGo,
+  SiGooglecloud,
   SiJavascript,
   SiJenkins,
   SiMongodb,
@@ -22,6 +24,7 @@ import {
   SiNodedotjs,
   SiOpenai,
   SiPostgresql,
+  SiPrisma,
   SiReact,
   SiReactquery,
   SiSass,
@@ -91,8 +94,12 @@ const skillIcons: Record<string, ReactNode> = {
   Go: <SiGo />,
   Express: <SiExpress />,
   MongoDB: <SiMongodb />,
+  "MongoDB Atlas": <SiMongodb />,
+  Prisma: <SiPrisma />,
   Firebase: <SiFirebase />,
   PostgreSQL: <SiPostgresql />,
+  "Google Cloud": <SiGooglecloud />,
+  AWS: <SiAmazonwebservices />,
   Git: <SiGithub />,
   "GitHub Desktop": <SiGithub />,
   Jenkins: <SiJenkins />,
@@ -123,8 +130,12 @@ const skillColors: Record<string, string> = {
   Go: "text-cyan-300",
   Express: "text-emerald-300",
   MongoDB: "text-emerald-400",
+  "MongoDB Atlas": "text-green-400",
+  Prisma: "text-indigo-300",
   Firebase: "text-amber-300",
   PostgreSQL: "text-sky-300",
+  "Google Cloud": "text-blue-400",
+  AWS: "text-orange-400",
   Git: "text-orange-300",
   "GitHub Desktop": "text-orange-300",
   Jenkins: "text-yellow-300",
@@ -140,6 +151,7 @@ export function SkillsSection() {
     { label: "Frontend", items: skillsData.frontend },
     { label: "Backend", items: skillsData.backend },
     { label: "Database", items: skillsData.database },
+    { label: "Cloud", items: skillsData.cloud },
     { label: "Tooling", items: skillsData.tooling },
     { label: "AI Agents", items: skillsData.aiAgents },
   ];
@@ -159,8 +171,8 @@ export function SkillsSection() {
           Skills
         </h2>
         <p className="mt-1 text-sm text-zinc-400">
-          A mix of frontend, backend, tooling, and AI agents that supports
-          fullstack development.
+          A mix of frontend, backend, database, cloud, tooling, and AI agents
+          that supports fullstack development.
         </p>
       </motion.div>
 

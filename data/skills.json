@@ -16,9 +16,12 @@
   "database": [
     "Microsoft SQL Server",
     "MongoDB",
+    "MongoDB Atlas",
+    "Prisma",
     "Firebase",
     "PostgreSQL"
   ],
+  "cloud": ["Google Cloud", "AWS"],
   "tooling": ["Git", "GitHub Desktop", "Jenkins", "CI/CD", "Docker", "VS Code"],
   "aiAgents": ["Cursor", "Claude Code", "Codex"]
 }
