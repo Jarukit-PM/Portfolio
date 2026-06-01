@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import { motion, type Variants } from "framer-motion";
 import skillsData from "@/data/skills.json";
+import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 import {
   SiAmazonwebservices,
   SiAngular,
@@ -147,13 +148,14 @@ const skillColors: Record<string, string> = {
 };
 
 export function SkillsSection() {
+  const { t } = useLanguage();
   const groups = [
-    { label: "Frontend", items: skillsData.frontend },
-    { label: "Backend", items: skillsData.backend },
-    { label: "Database", items: skillsData.database },
-    { label: "Cloud", items: skillsData.cloud },
-    { label: "Tooling", items: skillsData.tooling },
-    { label: "AI Agents", items: skillsData.aiAgents },
+    { label: t.skills.frontend, items: skillsData.frontend },
+    { label: t.skills.backend, items: skillsData.backend },
+    { label: t.skills.database, items: skillsData.database },
+    { label: t.skills.cloud, items: skillsData.cloud },
+    { label: t.skills.tooling, items: skillsData.tooling },
+    { label: t.skills.aiAgents, items: skillsData.aiAgents },
   ];
 
   return (
@@ -168,11 +170,10 @@ export function SkillsSection() {
         viewport={{ once: true, amount: 0.4 }}
       >
         <h2 className="text-lg font-semibold tracking-tight text-zinc-50 sm:text-xl">
-          Skills
+          {t.skills.title}
         </h2>
         <p className="mt-1 text-sm text-zinc-400">
-          A mix of frontend, backend, database, cloud, tooling, and AI agents
-          that supports fullstack development.
+          {t.skills.subtitle}
         </p>
       </motion.div>
 

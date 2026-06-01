@@ -6,6 +6,7 @@ import { useState, useCallback, useEffect } from "react";
 import { getImagePath, getBasePath } from "@/app/lib/utils";
 import { HiCodeBracket, HiLightBulb } from "react-icons/hi2";
 import { FaRocket, FaGraduationCap } from "react-icons/fa";
+import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -35,26 +36,25 @@ const tagColors: Record<string, string> = {
   "Web Development": "text-cyan-300",
 };
 
-const education = [
+const educationMeta = [
   {
-    degree: "Master of Business Administration (MBA)",
-    field: "Entrepreneurship / Entrepreneurial Studies",
     school: "King Mongkut's University of Technology Thonburi",
     schoolLogo: "/images/logos/KMUTT_Logo.png",
-    period: "Aug 2024 – May 2027",
     tags: ["Entrepreneurship", "Innovation Management"],
   },
   {
-    degree: "Bachelor of Engineering (BE)",
-    field: "Computer Engineering",
     school: "King Mongkut's University of Technology Thonburi",
     schoolLogo: "/images/logos/KMUTT_Logo.png",
-    period: "Aug 2022 – May 2026",
     tags: ["Software Development", "Web Development"],
   },
 ];
 
 export function EducationSection() {
+  const { t } = useLanguage();
+  const education = educationMeta.map((meta, index) => ({
+    ...meta,
+    ...t.education.items[index],
+  }));
   const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});
   const [basePath, setBasePath] = useState("");
   
@@ -83,10 +83,10 @@ export function EducationSection() {
       <div className="flex items-center justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold tracking-tight text-zinc-50 sm:text-xl">
-            Education
+            {t.education.title}
           </h2>
           <p className="mt-1 text-sm text-zinc-400">
-            Engineering + business background that bridges tech and impact.
+            {t.education.subtitle}
           </p>
         </div>
       </div>

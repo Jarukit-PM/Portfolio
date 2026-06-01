@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { FiMail, FiLinkedin, FiGithub } from "react-icons/fi";
 import Link from "next/link";
+import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 const container: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -18,6 +19,7 @@ const container: Variants = {
 };
 
 export function ContactSection() {
+  const { t } = useLanguage();
   return (
     <motion.section
       id="contact"
@@ -43,11 +45,10 @@ export function ContactSection() {
       <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-lg font-semibold tracking-tight text-zinc-50 sm:text-xl">
-            Let&apos;s build something great together.
+            {t.contact.title}
           </h2>
           <p className="mt-1 max-w-md text-sm text-zinc-400">
-            Open to frontend, fullstack, and software engineering roles,
-            especially where modern web tech and great UX come together.
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -57,7 +58,7 @@ export function ContactSection() {
             className="group inline-flex items-center gap-2 rounded-full bg-zinc-50 px-4 py-2.5 text-sm font-semibold text-zinc-950 shadow-lg shadow-red-500/30 transition hover:bg-red-500 hover:text-zinc-50"
           >
             <FiMail className="h-4 w-4 transition group-hover:-translate-y-0.5" />
-            Email me
+            {t.contact.emailMe}
           </a>
           <span className="text-xs font-mono text-zinc-400 sm:text-sm">
             jarukit.pm@gmail.com

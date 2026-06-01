@@ -11,6 +11,7 @@ import {
   SiGithub,
 } from "react-icons/si";
 import { HiCodeBracket, HiServer } from "react-icons/hi2";
+import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -44,27 +45,21 @@ const skillColors: Record<string, string> = {
   ".NET": "text-indigo-300",
 };
 
-const experiences = [
+const experienceMeta = [
   {
-    role: "Full Stack Developer",
     company: "IRPC Public Company Limited",
     companyLogo: "/images/logos/IRPC_Logo.png",
-    type: "Internship",
-    period: "Jun 2025 – Aug 2025 · 2 mos",
-    location: "Rayong, Thailand · On-site",
-    bullets: [
-      "Developed an internal web application using Angular and .NET, improving workflow efficiency across teams.",
-      "Gained hands-on experience with Jenkins deployment and implemented CI/CD pipelines for automated builds and releases.",
-      "Communicated technical concepts effectively with both technical and non-technical stakeholders.",
-      "Strengthened problem-solving skills through debugging and refactoring.",
-      "Designed the initial database structure and worked with SQL Server for data modeling, querying, and optimization.",
-    ],
     skills:
       "Full-Stack Development · Microsoft SQL Server · CI/CD · Jenkins · Angular · .NET",
   },
 ];
 
 export function ExperienceSection() {
+  const { t } = useLanguage();
+  const experiences = experienceMeta.map((meta, index) => ({
+    ...meta,
+    ...t.experience.items[index],
+  }));
   const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});
   const [basePath, setBasePath] = useState("");
   
@@ -93,14 +88,14 @@ export function ExperienceSection() {
       <div className="flex items-center justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold tracking-tight text-zinc-50 sm:text-xl">
-            Experience
+            {t.experience.title}
           </h2>
           <p className="mt-1 text-sm text-zinc-400">
-            Real-world impact from internships and hands-on projects.
+            {t.experience.subtitle}
           </p>
         </div>
         <div className="hidden text-xs font-medium text-zinc-400 sm:inline-flex">
-          INTERN · FULLSTACK
+          {t.experience.tagline}
         </div>
       </div>
 

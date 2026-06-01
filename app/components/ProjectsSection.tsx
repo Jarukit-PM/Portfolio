@@ -6,8 +6,10 @@ import Link from "next/link";
 import { FiChevronLeft, FiChevronRight, FiArrowRight } from "react-icons/fi";
 import { ProjectCard } from "@/app/components/ProjectCard";
 import { getFeaturedProjects, projects } from "@/app/lib/projects";
+import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 export function ProjectsSection() {
+  const { t } = useLanguage();
   const list = getFeaturedProjects();
   const totalCount = projects.length;
 
@@ -108,10 +110,10 @@ export function ProjectsSection() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 className="text-lg font-semibold tracking-tight text-zinc-50 sm:text-xl">
-            Projects
+            {t.projects.title}
           </h2>
           <p className="mt-1 text-sm text-zinc-400">
-            Selected work that highlights how I build and ship real products.
+            {t.projects.subtitle}
           </p>
         </div>
 
@@ -119,7 +121,7 @@ export function ProjectsSection() {
           href="/projects"
           className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-zinc-700/80 bg-zinc-900/80 px-4 py-2 text-sm font-medium text-zinc-100 transition hover:border-red-500/60 hover:bg-red-500/10 hover:text-red-200"
         >
-          View all projects
+          {t.projects.viewAll}
           <span className="rounded-full bg-zinc-800 px-2 py-0.5 text-xs text-zinc-400">
             {totalCount}
           </span>
@@ -134,7 +136,7 @@ export function ProjectsSection() {
             type="button"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            aria-label="Scroll projects left"
+            aria-label={t.projects.scrollLeft}
             onClick={() => handleArrowClick("left")}
             className="absolute left-4 top-1/2 z-20 -translate-y-1/2 focus:outline-none"
           >
@@ -150,7 +152,7 @@ export function ProjectsSection() {
             type="button"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            aria-label="Scroll projects right"
+            aria-label={t.projects.scrollRight}
             onClick={() => handleArrowClick("right")}
             className="absolute right-4 top-1/2 z-20 -translate-y-1/2 focus:outline-none"
           >
