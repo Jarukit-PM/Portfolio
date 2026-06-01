@@ -31,11 +31,25 @@ export type ProjectHighlightStructured = {
 
 export type ProjectHighlight = string | ProjectHighlightStructured;
 
+export type ProjectScreenshot = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+export type ProjectScreenshotGroup = {
+  title: string;
+  subtitle?: string;
+  platform?: "mobile" | "web";
+  screenshots: ProjectScreenshot[];
+};
+
 export type ProjectDetailContent = {
   overview: string;
   highlights: ProjectHighlight[];
   role?: string;
   disclaimer?: string;
+  screenshotGroups?: ProjectScreenshotGroup[];
 };
 
 export function isStructuredHighlight(

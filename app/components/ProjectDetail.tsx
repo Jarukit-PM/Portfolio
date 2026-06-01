@@ -1,24 +1,37 @@
 "use client";
 
 import {
+  AnimatePresence,
   motion,
   useInView,
   useReducedMotion,
   type Variants,
 } from "framer-motion";
 import Image from "next/image";
-import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import { createPortal } from "react-dom";
 import {
   FiAlertTriangle,
   FiArrowUpRight,
   FiBriefcase,
+  FiChevronLeft,
+  FiChevronRight,
   FiExternalLink,
   FiGithub,
   FiMap,
+  FiMaximize2,
   FiMonitor,
   FiPlay,
   FiServer,
   FiSmartphone,
+  FiX,
   FiZap,
 } from "react-icons/fi";
 import type {
@@ -26,6 +39,8 @@ import type {
   Project,
   ProjectDetailContent,
   ProjectHighlight,
+  ProjectScreenshot,
+  ProjectScreenshotGroup,
 } from "@/app/lib/projects";
 import { isStructuredHighlight } from "@/app/lib/projects";
 import { tagColors, tagIcons } from "@/app/lib/project-tags";
@@ -212,6 +227,327 @@ const highlightIcons: Record<HighlightIconKey, ReactNode> = {
 
 function highlightKey(item: ProjectHighlight, index: number): string {
   return isStructuredHighlight(item) ? item.title : `${item}-${index}`;
+}
+
+function ScreenshotLightbox({
+  shots,
+  index,
+  onClose,
+  onIndexChange,
+  reduceMotion,
+}: {
+  shots: ProjectScreenshot[];
+  index: number;
+  onClose: () => void;
+  onIndexChange: (index: number) => void;
+  reduceMotion: boolean | null;
+}) {
+  const shot = shots[index];
+  const hasMultiple = shots.length > 1;
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const goPrev = useCallback(() => {
+    onIndexChange((index - 1 + shots.length) % shots.length);
+  }, [index, onIndexChange, shots.length]);
+
+  const goNext = useCallback(() => {
+    onIndexChange((index + 1) % shots.length);
+  }, [index, onIndexChange, shots.length]);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (!hasMultiple) return;
+      if (event.key === "ArrowLeft") goPrev();
+      if (event.key === "ArrowRight") goNext();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [goNext, goPrev, hasMultiple, onClose]);
+
+  const label = shot.caption ?? shot.alt;
+
+  const shellClassName =
+    "fixed inset-0 z-50 flex flex-col";
+
+  const inner = (
+    <>
+      <button
+        type="button"
+        className="absolute inset-0 bg-zinc-950/90 backdrop-blur-sm"
+        onClick={onClose}
+        aria-label="Close full size image"
+      />
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col p-4 sm:p-6">
+        <div className="flex shrink-0 items-center justify-between gap-3 pb-3">
+          <p className="min-w-0 truncate text-sm font-medium text-zinc-200 sm:text-base">
+            {label}
+          </p>
+          <div className="flex shrink-0 items-center gap-2">
+            {hasMultiple ? (
+              <span className="hidden text-xs text-zinc-500 sm:inline">
+                {index + 1} / {shots.length}
+              </span>
+            ) : null}
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={onClose}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-zinc-50"
+              aria-label="Close"
+            >
+              <FiX className="h-5 w-5" aria-hidden />
+            </button>
+          </div>
+        </div>
+
+        <div className="relative flex min-h-0 flex-1 items-center justify-center">
+          {hasMultiple ? (
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                goPrev();
+              }}
+              className="absolute left-0 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800 sm:left-2"
+              aria-label="Previous screenshot"
+            >
+              <FiChevronLeft className="h-6 w-6" aria-hidden />
+            </button>
+          ) : null}
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={getImagePath(shot.src)}
+            alt={shot.alt}
+            className="max-h-[min(78vh,900px)] max-w-full object-contain"
+            onClick={(event) => event.stopPropagation()}
+          />
+
+          {hasMultiple ? (
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                goNext();
+              }}
+              className="absolute right-0 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800 sm:right-2"
+              aria-label="Next screenshot"
+            >
+              <FiChevronRight className="h-6 w-6" aria-hidden />
+            </button>
+          ) : null}
+        </div>
+
+        {hasMultiple ? (
+          <p className="shrink-0 pt-3 text-center text-xs text-zinc-500">
+            <span className="sm:hidden">
+              {index + 1} / {shots.length} ·{" "}
+            </span>
+            Arrow keys to navigate · Esc to close
+          </p>
+        ) : (
+          <p className="shrink-0 pt-3 text-center text-xs text-zinc-500">
+            Esc to close
+          </p>
+        )}
+      </div>
+    </>
+  );
+
+  if (typeof document === "undefined") return null;
+
+  if (reduceMotion) {
+    return createPortal(
+      <div
+        className={shellClassName}
+        role="dialog"
+        aria-modal="true"
+        aria-label={label}
+      >
+        {inner}
+      </div>,
+      document.body
+    );
+  }
+
+  return createPortal(
+    <motion.div
+      className={shellClassName}
+      role="dialog"
+      aria-modal="true"
+      aria-label={label}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      {inner}
+    </motion.div>,
+    document.body
+  );
+}
+
+function ScreenshotCard({
+  shot,
+  platform = "web",
+  onOpen,
+}: {
+  shot: ProjectScreenshot;
+  platform?: ProjectScreenshotGroup["platform"];
+  onOpen: () => void;
+}) {
+  const isMobile = platform === "mobile";
+  const label = shot.caption ?? shot.alt;
+
+  return (
+    <figure
+      className={`group relative overflow-hidden rounded-2xl border border-zinc-800/70 bg-zinc-900/60 shadow-[0_12px_40px_-20px_rgba(0,0,0,0.65)] ${
+        isMobile ? "mx-auto w-full max-w-[220px] sm:max-w-[240px]" : ""
+      }`}
+    >
+      <button
+        type="button"
+        onClick={onOpen}
+        className="flex w-full flex-col text-left transition hover:border-red-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/60 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+        aria-label={`View full size: ${label}`}
+      >
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-linear-to-r from-transparent via-red-500/40 to-transparent opacity-0 transition group-hover:opacity-100" />
+        <div
+          className={`relative w-full bg-zinc-950/80 ${
+            isMobile ? "aspect-[9/19]" : "aspect-[4/3]"
+          }`}
+        >
+          <Image
+            src={getImagePath(shot.src)}
+            alt=""
+            fill
+            className="object-contain object-center p-2 sm:p-3 transition group-hover:scale-[1.02]"
+            sizes={
+              isMobile
+                ? "(max-width: 640px) 45vw, 240px"
+                : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            }
+            unoptimized
+          />
+          <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-zinc-950/0 transition group-hover:bg-zinc-950/35">
+            <span className="flex items-center gap-1.5 rounded-full border border-zinc-600/80 bg-zinc-900/90 px-3 py-1.5 text-xs font-medium text-zinc-100 opacity-0 shadow-lg transition group-hover:opacity-100">
+              <FiMaximize2 className="h-3.5 w-3.5" aria-hidden />
+              View full size
+            </span>
+          </span>
+        </div>
+        {shot.caption ? (
+          <span className="block border-t border-zinc-800/70 px-4 py-3 text-center text-xs font-medium text-zinc-300 sm:text-sm">
+            {shot.caption}
+          </span>
+        ) : null}
+      </button>
+    </figure>
+  );
+}
+
+function ScreenshotGroupSection({
+  group,
+  reduceMotion,
+}: {
+  group: ProjectScreenshotGroup;
+  reduceMotion: boolean | null;
+}) {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const platform = group.platform ?? "web";
+  const isMobile = platform === "mobile";
+  const GroupIcon = isMobile ? FiSmartphone : FiMonitor;
+
+  const gridClassName = isMobile
+    ? "grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+    : "grid gap-5 sm:grid-cols-2 lg:grid-cols-3";
+
+  const openLightbox = (index: number) => setLightboxIndex(index);
+  const closeLightbox = () => setLightboxIndex(null);
+
+  const header = (
+    <div className="flex items-start gap-3">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-red-500/35 bg-red-500/15 text-red-200">
+        <GroupIcon className="h-5 w-5" aria-hidden />
+      </span>
+      <div className="min-w-0 space-y-0.5">
+        <h3 className="text-base font-semibold text-zinc-50 sm:text-lg">
+          {group.title}
+        </h3>
+        {group.subtitle ? (
+          <p className="text-xs font-medium uppercase tracking-wide text-red-300/90 sm:text-sm">
+            {group.subtitle}
+          </p>
+        ) : null}
+      </div>
+    </div>
+  );
+
+  const lightbox =
+    lightboxIndex !== null ? (
+      <ScreenshotLightbox
+        key="screenshot-lightbox"
+        shots={group.screenshots}
+        index={lightboxIndex}
+        onClose={closeLightbox}
+        onIndexChange={setLightboxIndex}
+        reduceMotion={reduceMotion}
+      />
+    ) : null;
+
+  const lightboxPortal = reduceMotion ? (
+    lightbox
+  ) : (
+    <AnimatePresence>{lightbox}</AnimatePresence>
+  );
+
+  const renderCard = (shot: ProjectScreenshot, index: number) => (
+    <ScreenshotCard
+      shot={shot}
+      platform={platform}
+      onOpen={() => openLightbox(index)}
+    />
+  );
+
+  if (reduceMotion) {
+    return (
+      <div className="space-y-5">
+        {header}
+        <ul className={gridClassName}>
+          {group.screenshots.map((shot, index) => (
+            <li key={shot.src}>{renderCard(shot, index)}</li>
+          ))}
+        </ul>
+        {lightboxPortal}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-5">
+      {header}
+      <motion.ul className={gridClassName} variants={staggerContainer}>
+        {group.screenshots.map((shot, index) => (
+          <motion.li key={shot.src} variants={staggerChild}>
+            {renderCard(shot, index)}
+          </motion.li>
+        ))}
+      </motion.ul>
+      {lightboxPortal}
+    </div>
+  );
 }
 
 function FeatureHighlightCard({
@@ -413,6 +749,21 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
           </motion.ul>
         )}
       </AnimatedSection>
+
+      {detail.screenshotGroups && detail.screenshotGroups.length > 0 && (
+        <AnimatedSection className="space-y-10" reduceMotion={reduceMotion}>
+          <SectionHeading id="screenshots">Screenshots</SectionHeading>
+          <div className="space-y-12">
+            {detail.screenshotGroups.map((group) => (
+              <ScreenshotGroupSection
+                key={group.title}
+                group={group}
+                reduceMotion={reduceMotion}
+              />
+            ))}
+          </div>
+        </AnimatedSection>
+      )}
 
       {detail.role && (
         <AnimatedSection className="space-y-4" reduceMotion={reduceMotion}>

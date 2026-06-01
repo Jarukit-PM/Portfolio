@@ -62,7 +62,78 @@
         ]
       }
     ],
-    "role": "Project Manager — owned scope, specs, and delivery across the mobile app, web app, and API. Defined user flows per role (driver vs. company/admin), prioritized the backlog, and kept all surfaces aligned on the driver-selected delivery model."
+    "role": "Project Manager — owned scope, specs, and delivery across the mobile app, web app, and API. Defined user flows per role (driver vs. company/admin), prioritized the backlog, and kept all surfaces aligned on the driver-selected delivery model.",
+    "screenshotGroups": [
+      {
+        "title": "Mobile app",
+        "subtitle": "Drivers · Expo + React Native",
+        "platform": "mobile",
+        "screenshots": [
+          {
+            "src": "/images/project/SpaceShare/01_login.png",
+            "alt": "SpaceShare driver app login screen",
+            "caption": "Sign in"
+          },
+          {
+            "src": "/images/project/SpaceShare/03_home.png",
+            "alt": "SpaceShare driver home screen",
+            "caption": "Driver home"
+          },
+          {
+            "src": "/images/project/SpaceShare/07_ui-driver-job-list.png",
+            "alt": "SpaceShare packages available on route",
+            "caption": "Packages on route"
+          },
+          {
+            "src": "/images/project/SpaceShare/Package_detail.png",
+            "alt": "SpaceShare package detail on mobile",
+            "caption": "Package detail"
+          },
+          {
+            "src": "/images/project/SpaceShare/finish.png",
+            "alt": "SpaceShare trip stops and completion",
+            "caption": "Trip & delivery stops"
+          },
+          {
+            "src": "/images/project/SpaceShare/suspend.png",
+            "alt": "SpaceShare driver penalty and suspension notification",
+            "caption": "Penalty notification"
+          },
+          {
+            "src": "/images/project/SpaceShare/appeal.png",
+            "alt": "SpaceShare driver submit appeal form",
+            "caption": "Submit appeal"
+          }
+        ]
+      },
+      {
+        "title": "Web app",
+        "subtitle": "Companies & admins · Next.js",
+        "platform": "web",
+        "screenshots": [
+          {
+            "src": "/images/project/SpaceShare/Dashboard.png",
+            "alt": "SpaceShare company admin dashboard",
+            "caption": "Company dashboard"
+          },
+          {
+            "src": "/images/project/SpaceShare/Create_Package_Confirmation.png",
+            "alt": "SpaceShare create parcel payment confirmation step",
+            "caption": "Create parcel — payment review"
+          },
+          {
+            "src": "/images/project/SpaceShare/Event_Detail.png",
+            "alt": "SpaceShare delivery event detail with map",
+            "caption": "Delivery event detail"
+          },
+          {
+            "src": "/images/project/SpaceShare/Pay_confirm.png",
+            "alt": "SpaceShare payment confirmation for teams",
+            "caption": "Payment confirmation"
+          }
+        ]
+      }
+    ]
   },
   "my-portfolio": {
     "overview": "This site is the portfolio you're browsing — a static Next.js app with App Router, Framer Motion, and Three.js. I use it to present projects, skills, experience, and a downloadable resume, with smooth section animations and a dark zinc theme with red accents. It deploys to GitHub Pages with an optional `/portfolio` base path.",
