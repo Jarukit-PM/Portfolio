@@ -16,6 +16,7 @@ import {
 } from "react-icons/fi";
 import { tagColors, tagIcons } from "@/app/lib/project-tags";
 import { getProjectBySlug } from "@/app/lib/projects";
+import { localizeProject } from "@/app/lib/i18n/project-locale";
 import { ProjectStars } from "@/app/components/ProjectStars";
 import { getImagePath } from "@/app/lib/utils";
 import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
@@ -72,10 +73,13 @@ const glowOrb: Variants = {
 };
 
 export function HeroSection() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const name = "Jarukit Pan-Iam";
   const resumeHref = "/resume/jarukit-pan-iam-resume.pdf";
-  const featuredProject = getProjectBySlug(HERO_FEATURED_SLUG);
+  const featuredProjectRaw = getProjectBySlug(HERO_FEATURED_SLUG);
+  const featuredProject = featuredProjectRaw
+    ? localizeProject(featuredProjectRaw, lang)
+    : undefined;
   const [coverError, setCoverError] = useState(false);
 
   const coverSrc =

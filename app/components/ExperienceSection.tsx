@@ -47,10 +47,7 @@ const skillColors: Record<string, string> = {
 
 const experienceMeta = [
   {
-    company: "IRPC Public Company Limited",
     companyLogo: "/images/logos/IRPC_Logo.png",
-    skills:
-      "Full-Stack Development · Microsoft SQL Server · CI/CD · Jenkins · Angular · .NET",
   },
 ];
 
@@ -58,6 +55,8 @@ export function ExperienceSection() {
   const { t } = useLanguage();
   const experiences = experienceMeta.map((meta, index) => ({
     ...meta,
+    company: t.experience.companyName,
+    skills: t.experience.skillsLine,
     ...t.experience.items[index],
   }));
   const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});

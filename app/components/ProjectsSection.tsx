@@ -6,11 +6,12 @@ import Link from "next/link";
 import { FiChevronLeft, FiChevronRight, FiArrowRight } from "react-icons/fi";
 import { ProjectCard } from "@/app/components/ProjectCard";
 import { getFeaturedProjects, projects } from "@/app/lib/projects";
+import { localizeProjects } from "@/app/lib/i18n/project-locale";
 import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 export function ProjectsSection() {
-  const { t } = useLanguage();
-  const list = getFeaturedProjects();
+  const { lang, t } = useLanguage();
+  const list = localizeProjects(getFeaturedProjects(), lang);
   const totalCount = projects.length;
 
   const duplicatedProjects =

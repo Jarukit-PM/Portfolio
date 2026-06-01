@@ -1,0 +1,211 @@
+{
+  "spaceshare": {
+    "overview": "SpaceShare เชื่อมผู้ส่งสินค้า B2B กับคนขับที่วางแผนเดินทางข้ามจังหวัดและมีพื้นที่ว่างในรถ เราส่งมอบสามผลิตภัณฑ์ — แอปมือถือสำหรับคนขับ แอปเว็บสำหรับบริษัท/แอดมิน และ API กลาง — บนโมเดลที่คนขับเลือกงานเอง: ไม่มีการจับคู่อัตโนมัติ คนขับเลือกพัสดุบนเส้นทาง แพ็กพร้อมตรวจความจุ แล้วส่งพร้อมหลักฐานการส่งมอบ",
+    "highlights": [
+      {
+        "title": "แอปมือถือ",
+        "icon": "mobile",
+        "subtitle": "คนขับ · Expo + React Native",
+        "bullets": [
+          "เส้นทางวางแผน — ต้นทาง ปลายทาง เวลา ความจุ และค่าเบี่ยงเบนสูงสุด",
+          "ดูพัสดุบนเส้นทางและเลือกงานที่จะรับ",
+          "แผนที่ รายการงาน ปิดงานส่ง และการแจ้งเตือน"
+        ]
+      },
+      {
+        "title": "แอปเว็บ",
+        "icon": "web",
+        "subtitle": "บริษัทและแอดมิน · Next.js + TypeScript",
+        "bullets": [
+          "สร้างและจัดการพัสดุ/ชิปเมนต์",
+          "บทบาททีมและสิทธิ์การใช้งาน",
+          "ติดตามสถานะ แจ้งเตือน เข้าสู่ระบบและยืนยันตัวตน"
+        ]
+      },
+      {
+        "title": "Backend API",
+        "icon": "api",
+        "subtitle": "Go · PostgreSQL · Redis",
+        "bullets": [
+          "เส้นทางวางแผนและรายการพัสดุตามการเบี่ยงเบน (PostGIS)",
+          "แพ็กชิปเมนต์พร้อมตรวจสอบความจุ",
+          "ไทม์ไลน์สถานะ JWT auth และสัญญา API ร่วมกันระหว่างมือถือและเว็บ"
+        ]
+      },
+      {
+        "title": "ขั้นตอนหลัก",
+        "icon": "workflow",
+        "subtitle": "คนขับเลือกงานเอง",
+        "bullets": [
+          "เส้นทาง → พัสดุบนเส้นทาง → คนขับเลือก (ไม่จับคู่อัตโนมัติ)",
+          "ยืนยันแพ็ก → นำทาง → หลักฐานการส่งมอบ",
+          "ตัวกรองรายการตามการเบี่ยงเบนในปัจจุบัน แผนเวลา/ความจุอยู่ใน roadmap"
+        ]
+      },
+      {
+        "title": "การส่งมอบผลิตภัณฑ์",
+        "icon": "management",
+        "subtitle": "Project management",
+        "bullets": [
+          "กำหนดขอบเขต MVP สำหรับ B2B ข้ามจังหวัดและเส้นทางทดลอง",
+          "จัดการ backlog ครบ API มือถือ และเว็บ",
+          "ประสานทีมผู้ก่อตั้งและวิศวกรเรื่องบทบาทและกติกาธุรกิจ"
+        ]
+      },
+      {
+        "title": "สถานะ",
+        "icon": "launch",
+        "subtitle": "ก่อนเปิดตัว · พร้อมทดลองใช้",
+        "bullets": [
+          "ลูปหลักใช้งานได้ครบทั้งสามฝั่ง",
+          "repo ส่วนตัว — ดูรายละเอียดเต็มในวิดีโอเดโมด้านล่าง"
+        ]
+      }
+    ],
+    "role": "Project Manager — กำหนดขอบเขต สเปก และส่งมอบครบแอปมือถือ แอปเว็บ และ API ออกแบบ user flow ตามบทบาท (คนขับ vs บริษัท/แอดมิน) จัดลำดับ backlog และให้ทุกฝั่งสอดคล้องกับโมเดลคนขับเลือกงานเอง",
+    "screenshotGroups": [
+      {
+        "title": "แอปมือถือ",
+        "subtitle": "คนขับ · Expo + React Native",
+        "platform": "mobile",
+        "screenshots": [
+          {
+            "src": "/images/project/SpaceShare/01_login.png",
+            "alt": "หน้าล็อกอินแอปคนขับ SpaceShare",
+            "caption": "เข้าสู่ระบบ"
+          },
+          {
+            "src": "/images/project/SpaceShare/03_home.png",
+            "alt": "หน้าแรกแอปคนขับ SpaceShare",
+            "caption": "หน้าแรกคนขับ"
+          },
+          {
+            "src": "/images/project/SpaceShare/07_ui-driver-job-list.png",
+            "alt": "รายการพัสดุบนเส้นทาง SpaceShare",
+            "caption": "พัสดุบนเส้นทาง"
+          },
+          {
+            "src": "/images/project/SpaceShare/Package_detail.png",
+            "alt": "รายละเอียดพัสดุบนมือถือ SpaceShare",
+            "caption": "รายละเอียดพัสดุ"
+          },
+          {
+            "src": "/images/project/SpaceShare/finish.png",
+            "alt": "จุดแวะและการส่งมอบ SpaceShare",
+            "caption": "จุดแวะและการส่ง"
+          },
+          {
+            "src": "/images/project/SpaceShare/suspend.png",
+            "alt": "การแจ้งเตือนโทษและระงับคนขับ SpaceShare",
+            "caption": "แจ้งเตือนโทษ"
+          },
+          {
+            "src": "/images/project/SpaceShare/appeal.png",
+            "alt": "ฟอร์มยื่นอุทธรณ์คนขับ SpaceShare",
+            "caption": "ยื่นอุทธรณ์"
+          }
+        ]
+      },
+      {
+        "title": "แอปเว็บ",
+        "subtitle": "บริษัทและแอดมิน · Next.js",
+        "platform": "web",
+        "screenshots": [
+          {
+            "src": "/images/project/SpaceShare/Dashboard.png",
+            "alt": "แดชบอร์ดแอดมินบริษัท SpaceShare",
+            "caption": "แดชบอร์ดบริษัท"
+          },
+          {
+            "src": "/images/project/SpaceShare/Create_Package_Confirmation.png",
+            "alt": "ขั้นยืนยันการชำระเงินเมื่อสร้างพัสดุ SpaceShare",
+            "caption": "สร้างพัสดุ — ตรวจสอบการชำระ"
+          },
+          {
+            "src": "/images/project/SpaceShare/Event_Detail.png",
+            "alt": "รายละเอียดเหตุการณ์จัดส่งพร้อมแผนที่ SpaceShare",
+            "caption": "รายละเอียดเหตุการณ์จัดส่ง"
+          },
+          {
+            "src": "/images/project/SpaceShare/Pay_confirm.png",
+            "alt": "ยืนยันการชำระเงินสำหรับทีม SpaceShare",
+            "caption": "ยืนยันการชำระเงิน"
+          }
+        ]
+      }
+    ]
+  },
+  "my-portfolio": {
+    "overview": "เว็บไซต์นี้คือพอร์ตโฟลิโอที่คุณกำลังดูอยู่ — แอป Next.js แบบ static พร้อม App Router, Framer Motion และ Three.js ใช้แสดงโปรเจกต์ ทักษะ ประสบการณ์ และดาวน์โหลดเรซูเม มีแอนิเมชันตามส่วนและธีมมืดโทน zinc พร้อมจุดเน้นสีแดง รองรับ GitHub Pages และ base path `/portfolio` แบบเลือกได้",
+    "highlights": [
+      "เลย์เอาต์ App Router พร้อมส่วน hero, โปรเจกต์, ทักษะ, ประสบการณ์, การศึกษา และติดต่อ",
+      "Framer Motion สำหรับแอนิเมชันเลื่อนและ hover บนการ์ดและเมนู",
+      "Three.js / React Three Fiber สำหรับภาพ 3D ในส่วน hero",
+      "เนื้อหาจาก JSON ใน `data/` — ขยายได้โดยไม่ต้องแก้เลย์เอาต์หลัก",
+      "Static export (`output: 'export'`) สำหรับ GitHub Pages พร้อม `getImagePath()` จัดการ asset",
+      "ดาวน์โหลดเรซูเมจาก `public/resume/` และรองรับทุกขนาดหน้าจอ"
+    ],
+    "role": "พัฒนาคนเดียว — ออกแบบโครงสร้างข้อมูล สร้าง UI ทั้งหมด เชื่อมไฟล์ข้อมูล และตั้งค่า static export กับ GitHub Pages"
+  },
+  "figure-shop": {
+    "overview": "Figure Shop เป็นตลาดซื้อขายฟิกเกอร์สะสมแบบ full-stack แยกเป็น Express REST API กับ MongoDB และหน้าร้าน/แอดมิน EJS ที่เรียก API ผ่าน Axios ครอบคลุมแคตตาล็อก อัปโหลดรูป ส่วนลด ตะกร้า คำสั่งซื้อ การชำระเงิน และ analytics",
+    "highlights": [
+      "ยืนยันตัวตนด้วย session, bcrypt และตรวจชื่อผู้ใช้ซ้ำ",
+      "แคตตาล็อกสินค้า หมวดหมู่ อัปโหลดรูปด้วย Multer (เก็บ base64 ใน MongoDB) และตั้งเวลาส่วนลด",
+      "ตะกร้า คำสั่งซื้อ วิธี/ประเภทการชำระ และที่อยู่สำหรับ checkout",
+      "API analytics สรุปหมวดขายดีและยอดใช้จ่ายต่อผู้ใช้",
+      "หน้าแอดมิน EJS จัดการสินค้า/ส่วนลด และหน้าร้าน ตะกร้า ติดตามคำสั่งซื้อ",
+      "Docker Compose รัน MariaDB seed, backend และ frontend พร้อมกัน"
+    ],
+    "role": "Full-stack developer — ออกแบบสัญญา API พัฒนา backend/frontend และจัดทำเอกสาร deploy ด้วย Docker Compose"
+  },
+  "asal": {
+    "overview": "Another Story Another Legacy (ASAL) เป็นแพลตฟอร์ม TTRPG ออนไลน์สำหรับช่วงที่เล่นโต๊ะจริงได้ยาก ทีมสร้างประสบการณ์สไตล์ D&D ใน Unity ให้ผู้เล่นสร้างตัวละคร ทอยลูกเต๋า ต่อสู้ แชท และผจญภัยพร้อมกันแบบเรียลไทม์ โดย Firebase ดูแล auth และสถานะเกม",
+    "highlights": [
+      "สร้างตัวละคร ปรับคลาส เผ่าพันธุ์ และความสามารถ",
+      "ทอยลูกเต๋าเสมือนและระบบต่อสู้",
+      "เครื่องมือออกแบบเรื่องสำหรับ Dungeon Master",
+      "ลงทะเบียนและเข้าสู่ระบบด้วยอีเมล/รหัสผ่านผ่าน Firebase Authentication",
+      "Realtime Database เก็บตัวละคร คลังไอเทม และแผนที่",
+      "มัลติเพลเยอร์ แชทในเกม และบันทึกเกม",
+      "แจกเป็นไฟล์ Windows (.exe) สำหรับเดสก์ท็อป"
+    ],
+    "role": "เน้น backend — ออกแบบ schema Firebase Realtime Database สำหรับตัวละคร คลังไอเทม และแผนที่ พัฒนาบริการ C# ซิงก์ข้อมูลเกมและระบบบัญชีให้ DM กับผู้เล่นทำงานร่วมกันได้"
+  },
+  "wifi-authentication-attack": {
+    "overview": "โปรเจกต์ความปลอดภัยไซเบอร์จำลองขั้นตอนโจมตี Wi-Fi ในห้องแล็บ — จับ handshake WPA/WPA2 deauth ถอดรหัสด้วย Hashcat และ Evil Twin captive portal ผ่านเมนู Bash บน Kali Linux (VMware) พร้อมอะแดปเตอร์ monitor mode",
+    "highlights": [
+      "เมนู `wifi_attack.sh` ตั้งค่าอะแดปเตอร์ monitor mode สแกน และรัน workflow",
+      "จับ handshake ตาม AP และช่องสัญญาณ แปลง `.cap` เป็น `.22000` สำหรับ Hashcat",
+      "Deauth ด้วย `aireplay-ng` (เจาะจง) หรือ `mdk4` (กระจาย)",
+      "ถอดรหัส: Rockyou, wordlist กำหนดเอง, rule (`best64.rule`) และ mask",
+      "Evil Twin: `hostapd`, `dnsmasq` และ Flask captive portal พอร์ต 80",
+      "บันทึกข้อมูลเข้าสู่ระบบใน `credentials.txt` สำหรับวิเคราะห์ในแล็บ"
+    ],
+    "role": "พัฒนาคนเดียว — เขียน Bash orchestration, Flask captive portal และจัดทำเอกสารห้องแล็บเสมือน",
+    "disclaimer": "เพื่อการศึกษาและวิจัยเท่านั้น ห้ามใช้กับเครือข่ายที่คุณไม่ได้เป็นเจ้าของหรือไม่มีสิทธิ์ทดสอบอย่างชัดแจ้ง ผู้ใช้รับผิดชอบต่อการใช้งานที่ผิดกฎหมายด้วยตนเอง"
+  },
+  "pacman-fpga": {
+    "overview": "Pacman FPGA เป็นเกมสไตล์ Pac-Man บน Verilog สำหรับบอร์ด Xilinx Artix-7 (ทดสอบบน Digilent Basys 3) ส่งภาพ VGA 640×480@60Hz แอนิเมชัน Pac-Man และผีสองตัว คะแนนจากการเก็บของ ชีวิตแบบหัวใจ และโปรเจกต์ Vivado พร้อมสร้าง bitstream",
+    "highlights": [
+      "Pipeline VGA 640×480 พร้อม ROM พื้นหลัง กำแพง สไปรต์ และลำดับชั้นภาพ",
+      "FSM การเคลื่อนที่ Pac-Man หลบกำแพง สไปรต์ตามทิศทาง และแอนิเมชันหลังชน",
+      "ผีสองตัวเคลื่อนที่อิสระ ตรวจชนคนเล่น",
+      "ดาวเก็บคะแนน respawn ในแปดโซนเขาวงกต",
+      "สถานะเกม: เริ่ม → เล่น → โดนชน → จบ → เริ่มใหม่ด้วย `start_btn`",
+      "แสดงคะแนนบน seven-segment (ทางเลือก) และมี bitstream ใน repo"
+    ],
+    "role": "Hardware developer — ออกแบบ integration ระดับบน ROM สไปรต์ FSM (`Pacman_control`, ผี, ดาว, หัวใจ) และตรวจชนกำแพง ทดสอบบน Basys 3"
+  },
+  "moded": {
+    "overview": "ModEd เป็นแพลตฟอร์ม full-stack วิชา CPE494 ที่ มจธ. — โค้ดเบสขนาดใหญ่ที่นักศึกษากว่า 30 คนพัฒนาโมดูลบน Go backend, UI JavaScript, PostgreSQL และ Dev Container ผมรับผิดชอบโมดูล HR: โมเดลพนักงาน workflow การลา และจุดเชื่อมกับระบบหลัก",
+    "highlights": [
+      "โมดูล HR: ข้อมูลพนักงาน คำขอลา และ workflow อนุมัติเชื่อม API กลาง",
+      "พัฒนาใน Dev Container ของทีม (Docker, Go, Postgres)",
+      "ใช้ git workflow: commit → `git pull --rebase` → แก้ conflict → push",
+      "เชื่อมกับสถาปัตยกรรม ModEd ตามทรัพยากรวิชา OOAD2568",
+      "ทำงานร่วมกันใน monorepo กับผู้ร่วมพัฒนากว่า 30 คน"
+    ],
+    "role": "หัวหน้าโมดูล HR — ออกแบบโดเมนพนักงาน/การลา พัฒนา backend และ UI ให้สอดคล้องกับ Dev Container และสัญญา API ของทีม"
+  }
+}

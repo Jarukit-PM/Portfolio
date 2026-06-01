@@ -2,14 +2,21 @@
 
 import Link from "next/link";
 import { AllProjectsGrid } from "@/app/components/AllProjectsGrid";
+import { DocumentTitle } from "@/app/components/DocumentTitle";
+import { SiteHeader } from "@/app/components/SiteHeader";
 import type { Project } from "@/app/lib/projects";
+import { localizeProjects } from "@/app/lib/i18n/project-locale";
 import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 export function AllProjectsView({ projects }: { projects: Project[] }) {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+  const localizedProjects = localizeProjects(projects, lang);
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8">
+    <>
+      <DocumentTitle title={t.allProjects.metaTitle} />
+      <SiteHeader />
+      <main className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8">
       <Link
         href="/#projects"
         className="inline-flex w-fit items-center gap-2 text-sm text-zinc-400 transition-colors hover:text-zinc-100"
@@ -26,7 +33,8 @@ export function AllProjectsView({ projects }: { projects: Project[] }) {
         </p>
       </header>
 
-      <AllProjectsGrid projects={projects} />
+      <AllProjectsGrid projects={localizedProjects} />
     </main>
+    </>
   );
 }

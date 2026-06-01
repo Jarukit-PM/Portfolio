@@ -8,6 +8,7 @@ import type { Project } from "@/app/lib/projects";
 import { tagColors, tagIcons } from "@/app/lib/project-tags";
 import { ProjectStars } from "@/app/components/ProjectStars";
 import { getImagePath } from "@/app/lib/utils";
+import { localizeProject } from "@/app/lib/i18n/project-locale";
 import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
 const cardVariants: Variants = {
@@ -29,13 +30,14 @@ export function ProjectCard({
   className = "",
   animate = true,
 }: ProjectCardProps) {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+  const localized = localizeProject(project, lang);
   const [imageError, setImageError] = useState(false);
 
   const imageSrc =
-    imageError || !project.image
+    imageError || !localized.image
       ? getImagePath("/github-cover.svg")
-      : getImagePath(project.image);
+      : getImagePath(localized.image);
 
   const card = (
     <article className="group relative h-full overflow-hidden rounded-2xl border border-zinc-800/70 bg-linear-to-br from-black via-zinc-950 to-zinc-900 transition-transform hover:scale-[1.02]">
@@ -45,7 +47,7 @@ export function ProjectCard({
         <div className="relative h-56 w-full overflow-hidden sm:h-64">
           <Image
             src={imageSrc}
-            alt={project.title}
+            alt={localized.title}
             fill
             className="object-cover object-center transition duration-500 group-hover:scale-105 group-hover:brightness-110"
             unoptimized
@@ -58,18 +60,18 @@ export function ProjectCard({
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-sm font-semibold text-zinc-50 sm:text-base">
-                {project.title}
+                {localized.title}
               </h3>
-              <ProjectStars stars={project.stars} />
+              <ProjectStars stars={localized.stars} />
             </div>
             <p className="line-clamp-2 text-xs text-zinc-300 sm:text-sm">
-              {project.description}
+              {localized.description}
             </p>
           </div>
 
-          {project.tags && project.tags.length > 0 && (
+          {localized.tags && localized.tags.length > 0 && (
             <div className="mt-1 flex flex-wrap gap-2 text-[11px] text-zinc-300 sm:text-xs">
-              {project.tags.map((tag) => (
+              {localized.tags.map((tag) => (
                 <span
                   key={tag}
                   className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700/80 bg-zinc-900/80 px-2.5 py-1"

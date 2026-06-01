@@ -345,7 +345,7 @@ function ScreenshotLightbox({
                 goNext();
               }}
               className="absolute right-0 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800 sm:right-2"
-              aria-label="Next screenshot"
+              aria-label={t.projectDetail.nextScreenshot}
             >
               <FiChevronRight className="h-6 w-6" aria-hidden />
             </button>
