@@ -18,6 +18,7 @@ import { tagColors, tagIcons } from "@/app/lib/project-tags";
 import { getProjectBySlug } from "@/app/lib/projects";
 import { localizeProject } from "@/app/lib/i18n/project-locale";
 import { ProjectStars } from "@/app/components/ProjectStars";
+import { HeroCanvas } from "@/app/components/three/HeroCanvas";
 import { getImagePath } from "@/app/lib/utils";
 import { useLanguage } from "@/app/lib/i18n/LanguageProvider";
 
@@ -92,7 +93,12 @@ export function HeroSection() {
     HERO_FEATURED_TAGS;
 
   return (
-    <section id="about" className="relative flex min-h-[70vh] items-center justify-center overflow-hidden rounded-3xl border border-zinc-800/40 bg-linear-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 shadow-[0_0_60px_rgba(0,0,0,0.7)] sm:px-10 lg:px-16">
+    <section id="about" className="relative flex min-h-[80vh] items-center justify-center overflow-hidden rounded-3xl border border-zinc-800/40 bg-linear-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 shadow-[0_0_60px_rgba(0,0,0,0.7)] sm:px-10 lg:px-16">
+      {/* immersive WebGL backdrop */}
+      <HeroCanvas />
+      {/* legibility overlay so text stays crisp over the 3D scene */}
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(5,5,5,0.55)_70%,rgba(5,5,5,0.85)_100%)]" />
+
       {/* background glow */}
       <motion.div
         className="pointer-events-none absolute -top-40 right-[-10%] h-72 w-72 rounded-full bg-red-500/25 blur-3xl"

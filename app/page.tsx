@@ -1,3 +1,4 @@
+import { ScrollProgress } from "./components/ScrollProgress";
 import { SiteHeader } from "./components/SiteHeader";
 import { HeroSection } from "./components/HeroSection";
 import { SkillsSection } from "./components/SkillsSection";
@@ -9,6 +10,7 @@ import { ProjectsSection } from "./components/ProjectsSection";
 export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50">
+      <ScrollProgress />
       <main className="mx-auto flex min-h-screen max-w-6xl flex-col gap-10 px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pt-10">
         <SiteHeader />
 

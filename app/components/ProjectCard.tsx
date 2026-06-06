@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  type Variants,
+} from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -34,13 +39,31 @@ export function ProjectCard({
   const localized = localizeProject(project, lang);
   const [imageError, setImageError] = useState(false);
 
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const spotlight = useMotionTemplate`radial-gradient(240px circle at ${pointerX}px ${pointerY}px, rgba(239,68,68,0.16), transparent 72%)`;
+
+  const handlePointerMove = (event: React.MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    pointerX.set(event.clientX - rect.left);
+    pointerY.set(event.clientY - rect.top);
+  };
+
   const imageSrc =
     imageError || !localized.image
       ? getImagePath("/github-cover.svg")
       : getImagePath(localized.image);
 
   const card = (
-    <article className="group relative h-full overflow-hidden rounded-2xl border border-zinc-800/70 bg-linear-to-br from-black via-zinc-950 to-zinc-900 transition-transform hover:scale-[1.02]">
+    <article
+      onMouseMove={handlePointerMove}
+      className="group relative h-full overflow-hidden rounded-2xl border border-zinc-800/70 bg-linear-to-br from-black via-zinc-950 to-zinc-900 transition-transform hover:scale-[1.02] hover:border-red-500/40"
+    >
+      <motion.div
+        aria-hidden
+        style={{ background: spotlight }}
+        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-red-500/60 to-transparent opacity-60" />
 
       <div className="flex h-full flex-col">
