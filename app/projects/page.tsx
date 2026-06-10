@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AllProjectsPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50">
+    <div className="relative min-h-screen text-zinc-50">
       <AllProjectsView projects={projects} />
     </div>
   );

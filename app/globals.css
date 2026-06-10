@@ -23,9 +23,68 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Lenis takes over scrolling when active */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+::selection {
+  background: rgba(239, 68, 68, 0.35);
+  color: #fafafa;
+}
+
+/* Ambient backdrop drift */
+@keyframes ambient-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(6vw, -4vh, 0) scale(1.12);
+  }
+  66% {
+    transform: translate3d(-4vw, 5vh, 0) scale(0.94);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.ambient-blob {
+  animation: ambient-drift 26s ease-in-out infinite;
+}
+
+.ambient-blob-slow {
+  animation: ambient-drift 38s ease-in-out infinite reverse;
+}
+
+.ambient-blob-reverse {
+  animation: ambient-drift 32s ease-in-out -10s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob,
+  .ambient-blob-slow,
+  .ambient-blob-reverse {
+    animation: none;
+  }
 }
 
 html[lang="th"] body {

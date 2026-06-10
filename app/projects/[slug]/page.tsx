@@ -41,7 +41,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const showRichDetail = hasRichProjectDetail(slug) && detail;
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50">
+    <div className="relative min-h-screen text-zinc-50">
       <div className="pointer-events-none fixed inset-x-0 top-0 h-40 bg-linear-to-b from-red-950/20 via-transparent to-transparent" />
       <ProjectPageClient
         project={project}

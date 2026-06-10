@@ -1,15 +1,14 @@
 {
   "spaceshare": {
-    "overview": "SpaceShare connects B2B shippers with inter-province drivers who already have a planned trip and spare capacity in their vehicle. We shipped three products — a driver mobile app, a company/admin web app, and a shared backend API — around a driver-selected delivery model: no auto-matching; drivers choose packages on their route, pack with capacity checks, then deliver with proof-of-delivery.",
+    "overview": "SpaceShare connects B2B shippers with inter-province drivers who already have spare capacity on a planned trip. Three products — a driver mobile app, a company web app, and a shared API — built around one idea: drivers pick the packages on their route, no auto-matching.",
     "highlights": [
       {
         "title": "Mobile app",
         "icon": "mobile",
         "subtitle": "Drivers · Expo + React Native",
         "bullets": [
-          "Planned routes — origin, destination, time, capacity, max deviation",
-          "Browse on-route packages and select shipments to carry",
-          "Maps, job list, delivery completion, notifications"
+          "Plan routes with time, capacity, and max deviation",
+          "Browse on-route packages, pick, and deliver with proof"
         ]
       },
       {
@@ -17,9 +16,8 @@
         "icon": "web",
         "subtitle": "Companies & admins · Next.js + TypeScript",
         "bullets": [
-          "Create and manage packages / shipments",
-          "Team roles and permissions",
-          "Track status, notifications, login & verification"
+          "Create and track shipments with team roles",
+          "Status updates, notifications, and verification"
         ]
       },
       {
@@ -27,29 +25,8 @@
         "icon": "api",
         "subtitle": "Go · PostgreSQL · Redis",
         "bullets": [
-          "Planned routes and deviation-based package lists (PostGIS)",
-          "Pack shipment with capacity validation",
-          "Status timeline, JWT auth, shared mobile + web contracts"
-        ]
-      },
-      {
-        "title": "Core workflow",
-        "icon": "workflow",
-        "subtitle": "Driver-selected delivery",
-        "bullets": [
-          "Route → on-route packages → driver picks (no auto-match)",
-          "Pack confirm → navigate → proof of delivery",
-          "List filters by route deviation today; time/capacity on roadmap"
-        ]
-      },
-      {
-        "title": "Product delivery",
-        "icon": "management",
-        "subtitle": "Project management",
-        "bullets": [
-          "MVP scope for inter-province B2B and pilot corridors",
-          "Backlog across API, mobile, and web",
-          "Aligned founders and engineers on roles and business rules"
+          "Route-deviation package matching with PostGIS",
+          "Capacity checks, status timeline, JWT auth"
         ]
       },
       {
@@ -58,11 +35,11 @@
         "subtitle": "Pre-launch · pilot-ready",
         "bullets": [
           "Core loop live on all three surfaces",
-          "Private repo — full walkthrough in demo video below"
+          "Private repo — full walkthrough in the demo video"
         ]
       }
     ],
-    "role": "Project Manager — owned scope, specs, and delivery across the mobile app, web app, and API. Defined user flows per role (driver vs. company/admin), prioritized the backlog, and kept all surfaces aligned on the driver-selected delivery model.",
+    "role": "Project Manager — owned scope, specs, and delivery across all three surfaces, keeping the team aligned on the driver-selected model.",
     "screenshotGroups": [
       {
         "title": "Mobile app",
@@ -136,76 +113,68 @@
     ]
   },
   "my-portfolio": {
-    "overview": "This site is the portfolio you're browsing — a static Next.js app with App Router, Framer Motion, and Three.js. I use it to present projects, skills, experience, and a downloadable resume, with smooth section animations and a dark zinc theme with red accents. It deploys to GitHub Pages with an optional `/portfolio` base path.",
+    "overview": "The site you're browsing — an immersive static Next.js app with Framer Motion and Three.js, deployed to GitHub Pages.",
     "highlights": [
-      "App Router layout with reusable sections for hero, projects, skills, experience, education, and contact",
-      "Framer Motion for scroll-linked and hover animations across cards and navigation",
-      "Three.js / React Three Fiber for immersive 3D visuals in the hero",
-      "JSON-driven content in `data/` for projects and skills — easy to extend without touching layout code",
-      "Static export (`output: 'export'`) for GitHub Pages, with `getImagePath()` handling basePath-aware assets",
-      "Resume download from `public/resume/` and responsive layout from mobile through desktop"
+      "Immersive 3D hero built with Three.js / React Three Fiber",
+      "Framer Motion scroll and hover animations throughout",
+      "JSON-driven content — add projects without touching layout code",
+      "Static export with basePath-aware assets for GitHub Pages"
     ],
-    "role": "Sole developer — designed the information architecture, built all UI components, wired data files, configured static export and GitHub Pages deployment."
+    "role": "Sole developer — design, build, and deployment."
   },
   "figure-shop": {
-    "overview": "Figure Shop is a full-stack marketplace for buying and selling collectible figures. I split the system into a Node.js/Express REST API backed by MongoDB and an EJS storefront/admin dashboard that consumes those APIs through Axios — covering catalog CRUD, image uploads, discounts, carts, orders, payments, and analytics.",
+    "overview": "A full-stack marketplace for collectible figures — an Express + MongoDB REST API behind an EJS storefront and admin dashboard.",
     "highlights": [
-      "Session-based authentication with bcrypt hashing and username availability checks",
-      "Product catalog with category tagging, Multer image uploads (stored as base64 in MongoDB), and discount scheduling",
-      "Shopping cart, order, payment method/type, and address endpoints for the full checkout pipeline",
-      "Analytics routes aggregating best-selling categories and per-user spending",
-      "Admin EJS views for product/discount CRUD plus customer shop, product detail, cart, and order tracking",
-      "Docker Compose option to run MariaDB seed, backend, and frontend together without local Node/MySQL setup"
+      "Session auth with bcrypt hashing",
+      "Catalog with image uploads and scheduled discounts",
+      "Cart, orders, and payments for the full checkout flow",
+      "Sales analytics and admin CRUD dashboards",
+      "One-command setup with Docker Compose"
     ],
-    "role": "Full-stack developer — architected API contracts, implemented backend controllers/routers and frontend Axios integration, and documented deployment with Docker Compose."
+    "role": "Full-stack developer — API design, backend and frontend, Docker deployment."
   },
   "asal": {
-    "overview": "Another Story Another Legacy (ASAL) is an online TTRPG platform built for the \"new normal\" — when in-person tabletop sessions were hard to arrange. Our team recreated the D&D-style experience in Unity so players can create characters, roll dice, fight, chat, and adventure together in real time, with Firebase handling auth and live game state.",
+    "overview": "An online TTRPG platform built in Unity — create characters, roll dice, fight, and adventure together in real time, with Firebase powering auth and live game state.",
     "highlights": [
-      "Character creation with customizable class, race, and abilities",
-      "Virtual dice rolling and a combat system for strategic battles",
-      "Story design tools for Dungeon Masters to craft custom maps and scenarios",
-      "Email/password sign-in and registration via Firebase Authentication",
-      "Realtime Database persistence for characters, inventory, and custom maps",
-      "Multiplayer, in-game chat, and game log for collaborative sessions",
-      "Shipped as a Windows PC build (.exe) for an optimized desktop experience"
+      "Character creation with class, race, and abilities",
+      "Virtual dice and strategic combat",
+      "Map and scenario tools for Dungeon Masters",
+      "Realtime multiplayer with in-game chat",
+      "Firebase Auth + Realtime Database persistence"
     ],
-    "role": "Backend-focused contributor (Jarukit Pan-Iam, 65070501006) — designed Firebase Realtime Database schemas for characters, inventories, and maps; built C# services syncing gameplay data and secure account flows so DMs and players could collaborate live."
+    "role": "Backend-focused — designed Firebase schemas and built C# services syncing live gameplay data."
   },
   "wifi-authentication-attack": {
-    "overview": "This cybersecurity mini project simulates real-world Wi-Fi attack workflows in a controlled lab — WPA/WPA2 handshake capture, deauthentication, Hashcat cracking, and an Evil Twin captive portal — packaged behind an interactive Bash menu on Kali Linux (VMware) with a USB monitor-mode adapter.",
+    "overview": "A controlled-lab simulation of real Wi-Fi attack workflows — WPA/WPA2 handshake capture, deauth, Hashcat cracking, and an Evil Twin captive portal — all behind one interactive Bash menu on Kali Linux.",
     "highlights": [
-      "Interactive `wifi_attack.sh` menu for adapter setup, monitor mode, scanning, and attack workflows",
-      "Handshake capture locked to a target AP and channel, with `.cap` → `.22000` conversion for Hashcat",
-      "Deauthentication via `aireplay-ng` (targeted) or `mdk4` (broadcast) to force client reconnects",
-      "Cracking pipelines: Rockyou, custom wordlists, rule-based (`best64.rule`), and mask patterns",
-      "Evil Twin stack: `hostapd` fake AP, `dnsmasq` DHCP/DNS redirect, Flask captive portal on port 80",
-      "Credential logging to `credentials.txt` for lab analysis and hardening discussion"
+      "Interactive menu for monitor mode, scanning, and attacks",
+      "Handshake capture with `.cap` → `.22000` conversion for Hashcat",
+      "Targeted (`aireplay-ng`) and broadcast (`mdk4`) deauth",
+      "Wordlist, rule-based, and mask cracking pipelines",
+      "Evil Twin stack: `hostapd` + `dnsmasq` + Flask captive portal"
     ],
-    "role": "Sole developer — implemented Bash orchestration, Flask captive portal templates, and documented the virtual lab setup (Kali on VMware, TP-Link Archer T2U Plus in monitor mode).",
-    "disclaimer": "For educational and research purposes only. Do not use on networks you do not own or lack explicit permission to test. You are solely responsible for any misuse."
+    "role": "Sole developer — Bash orchestration, captive portal, and lab documentation.",
+    "disclaimer": "For educational and research purposes only. Never use on networks you don't own or lack explicit permission to test."
   },
   "pacman-fpga": {
-    "overview": "Pacman FPGA is a complete Pac-Man–style game implemented in Verilog for Xilinx Artix-7 boards (tested on Digilent Basys 3). The design drives 640×480@60 Hz VGA output, animates Pac-Man and two ghosts, manages collectible scoring and heart-based lives, and includes a Vivado project ready for bitstream generation.",
+    "overview": "A complete Pac-Man–style game written in Verilog for the Artix-7 (Basys 3) — 640×480 VGA output, animated ghosts, scoring, lives, and a ready-to-build Vivado project.",
     "highlights": [
-      "640×480 VGA pipeline with background ROM, walls, layered sprites, and compositor priority",
-      "Pac-Man motion FSM with wall avoidance, direction-dependent sprites, and post-hit ghost animation",
-      "Two autonomous ghosts with independent speed offsets and collision detection against Pac-Man",
-      "Collectible stars respawning across eight maze regions with a 4-digit score counter",
-      "Game state machine: start → play → hit (invincibility window) → game over → restart via `start_btn`",
-      "Optional seven-segment score display; shipped bitstream from Vivado 2015.4 included in the repo"
+      "640×480@60 Hz VGA pipeline with layered sprites",
+      "Pac-Man FSM with wall avoidance and directional sprites",
+      "Two autonomous ghosts with collision detection",
+      "Respawning collectibles and 4-digit scoring",
+      "Full game loop: start → play → hit → game over → restart"
     ],
-    "role": "Hardware developer — designed top-level integration, sprite ROMs, FSMs (`Pacman_control`, ghosts, stars, hearts), and maze collision logic; validated on Basys 3 with push-button controls."
+    "role": "Hardware developer — top-level integration, sprite ROMs, FSMs, and collision logic, validated on Basys 3."
   },
   "moded": {
-    "overview": "ModEd is the capstone full-stack platform for CPE494 at KMUTT — a large collaborative codebase where 30+ students shipped modules on a shared Go backend, JavaScript UI, PostgreSQL, and VS Code Dev Container workflow. I owned the HR module: employee data model, leave-approval flows, and integration hooks into the rest of the system.",
+    "overview": "The capstone full-stack platform for CPE494 at KMUTT — 30+ students shipping modules on a shared Go + PostgreSQL codebase. I owned the HR module.",
     "highlights": [
-      "HR module ownership: employee entities, leave requests, and approval workflows wired to shared APIs",
-      "Developed inside the team Dev Container (Docker, Go, Postgres pre-installed) for consistent environments",
-      "Followed team git workflow: commit → `git pull --rebase` → resolve conflicts → push",
-      "Integrated with the broader ModEd architecture referenced from the OOAD2568 course resources",
-      "Collaborated at scale (~30+ contributors) on a monorepo-style fullstack codebase"
+      "Employee data model and leave-approval workflows",
+      "Integration hooks into the shared platform APIs",
+      "Team Dev Container workflow (Docker, Go, Postgres)",
+      "Collaboration at scale on a 30+ contributor monorepo"
     ],
-    "role": "HR module lead — designed the employee/leave domain model, implemented backend and UI integration points, and kept the module aligned with shared Dev Container and API conventions."
+    "role": "HR module lead — domain model, backend, and UI integration."
   }
 }

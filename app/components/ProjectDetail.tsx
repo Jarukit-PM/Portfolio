@@ -693,6 +693,26 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
         <p className="mt-5 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:mt-6 sm:text-base sm:leading-7">
           {project.description}
         </p>
+
+        {project.tags && project.tags.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700/80 bg-zinc-900/80 px-3 py-1.5 text-xs text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-800/80"
+              >
+                {tagIcons[tag] && (
+                  <span
+                    className={`text-sm ${tagColors[tag] ?? "text-zinc-300"}`}
+                  >
+                    {tagIcons[tag]}
+                  </span>
+                )}
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </HeroWrapper>
 
       {detail.disclaimer && (
@@ -721,7 +741,7 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
 
       <AnimatedSection className="space-y-4" reduceMotion={reduceMotion}>
         <SectionHeading id="overview">{t.projectDetail.overview}</SectionHeading>
-        <p className="max-w-3xl text-sm leading-relaxed text-zinc-200 sm:text-base sm:leading-7">
+        <p className="max-w-3xl text-base font-light leading-relaxed text-zinc-100 sm:text-xl sm:leading-9">
           {detail.overview}
         </p>
       </AnimatedSection>
@@ -777,29 +797,6 @@ export function ProjectDetail({ project, detail }: ProjectDetailProps) {
             <p className="max-w-3xl text-sm leading-relaxed text-zinc-200 sm:text-base sm:leading-7">
               {detail.role}
             </p>
-          </div>
-        </AnimatedSection>
-      )}
-
-      {project.tags && project.tags.length > 0 && (
-        <AnimatedSection className="space-y-5" reduceMotion={reduceMotion}>
-          <SectionHeading id="stack">{t.projectDetail.techStack}</SectionHeading>
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700/80 bg-zinc-900/80 px-3 py-1.5 text-xs text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-800/80 sm:text-sm"
-              >
-                {tagIcons[tag] && (
-                  <span
-                    className={`text-sm ${tagColors[tag] ?? "text-zinc-300"}`}
-                  >
-                    {tagIcons[tag]}
-                  </span>
-                )}
-                {tag}
-              </span>
-            ))}
           </div>
         </AnimatedSection>
       )}

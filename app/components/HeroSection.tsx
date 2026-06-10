@@ -61,6 +61,52 @@ const titleChild: Variants = {
   },
 };
 
+const letterChild: Variants = {
+  hidden: { opacity: 0, y: "0.55em", rotateX: -60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      type: "spring",
+      stiffness: 220,
+      damping: 22,
+    },
+  },
+};
+
+const nameParent: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.035,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+function AnimatedName({ name }: { name: string }) {
+  return (
+    <motion.span
+      className="block"
+      variants={nameParent}
+      aria-label={name}
+      style={{ perspective: 600 }}
+    >
+      {name.split("").map((char, index) => (
+        <motion.span
+          key={`${char}-${index}`}
+          variants={letterChild}
+          className="inline-block bg-linear-to-b from-zinc-50 via-zinc-200 to-red-400 bg-clip-text text-transparent"
+          aria-hidden
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
 const glowOrb: Variants = {
   hidden: { opacity: 0, scale: 0.7 },
   visible: {
@@ -143,9 +189,7 @@ export function HeroSection() {
               <span className="block text-zinc-400 text-base sm:text-lg">
                 {t.hero.greeting}
               </span>
-              <span className="bg-linear-to-r from-zinc-50 via-red-200 to-red-500 bg-clip-text text-transparent">
-                {name}
-              </span>
+              <AnimatedName name={name} />
             </motion.h1>
 
             <motion.p
