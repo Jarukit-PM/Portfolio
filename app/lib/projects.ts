@@ -62,11 +62,9 @@ export const projects = projectsData as Project[];
 
 const projectDetails = projectDetailsData as Record<string, ProjectDetailContent>;
 
-/** Projects shown in the home page carousel preview */
-export const FEATURED_PROJECT_COUNT = 4;
-
+/** Projects shown in the home page carousel */
 export function getFeaturedProjects(): Project[] {
-  return projects.slice(0, FEATURED_PROJECT_COUNT);
+  return projects;
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {

@@ -32,6 +32,7 @@ import {
   SiDocker,
   SiExpo,
   SiRedis,
+  SiVuedotjs,
 } from "react-icons/si";
 
 export const tagIcons: Record<string, ReactNode> = {
@@ -67,6 +68,7 @@ export const tagIcons: Record<string, ReactNode> = {
   Redis: <SiRedis />,
   Expo: <SiExpo />,
   "React Native": <SiReact />,
+  "Vue 3": <SiVuedotjs />,
 };
 
 export const tagColors: Record<string, string> = {
@@ -102,4 +104,5 @@ export const tagColors: Record<string, string> = {
   Redis: "text-red-400",
   Expo: "text-zinc-100",
   "React Native": "text-sky-400",
+  "Vue 3": "text-emerald-400",
 };
