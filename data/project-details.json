@@ -1,4 +1,67 @@
 {
+  "ticket-booking-system": {
+    "overview": "An end-to-end cinema ticket booking platform — customers browse movies and showtimes, select seats on a live seat map, confirm bookings with distributed locking, and receive QR-coded digital tickets via email. Admins manage cinemas, screens, movies, showtimes, bookings, and audit logs from a full dashboard.",
+    "highlights": [
+      {
+        "title": "Customer experience",
+        "icon": "web",
+        "subtitle": "Vue 3 · TypeScript · Tailwind CSS",
+        "bullets": [
+          "Browse cinemas, movies, and showtimes with Now Showing / Coming Soon",
+          "Interactive seat map with WebSocket live updates (held, released, sold)",
+          "Checkout with Redis seat holds (5-min TTL) and idempotent booking confirm",
+          "My Bookings, digital QR tickets, and bilingual EN/TH UI"
+        ]
+      },
+      {
+        "title": "Backend API",
+        "icon": "api",
+        "subtitle": "Go · Gin · MongoDB · Redis",
+        "bullets": [
+          "REST endpoints for catalog, holds, confirm, and admin CRUD",
+          "WebSocket hub with Redis pub/sub for multi-instance seat map fan-out",
+          "Redis locking strategy to prevent double-booking under concurrent load",
+          "JWT + Google OAuth auth with role-based admin access"
+        ]
+      },
+      {
+        "title": "Async & infrastructure",
+        "icon": "workflow",
+        "subtitle": "asynq · Brevo · Docker Compose",
+        "bullets": [
+          "Background email delivery with asynq worker and Brevo API",
+          "Audit logs and email delivery tracking for admin support",
+          "Docker Compose stack with nginx, API, worker, MongoDB, and Redis",
+          "GitHub Actions CI for Go tests and Vue lint/type-check/build"
+        ]
+      }
+    ],
+    "role": "Sole developer — architecture, full-stack implementation, and deployment.",
+    "screenshotGroups": [
+      {
+        "title": "Architecture",
+        "subtitle": "System design & concurrency",
+        "platform": "web",
+        "screenshots": [
+          {
+            "src": "/images/project/TicketBookingSystem/01_system_architecture.png",
+            "alt": "Cinema ticket booking system architecture diagram",
+            "caption": "System architecture"
+          },
+          {
+            "src": "/images/project/TicketBookingSystem/02_redis_lock_strategy.png",
+            "alt": "Redis seat hold and confirm lock strategy",
+            "caption": "Redis lock strategy"
+          },
+          {
+            "src": "/images/project/TicketBookingSystem/03_asynq_message_queue.png",
+            "alt": "asynq background email queue flow",
+            "caption": "Async email queue"
+          }
+        ]
+      }
+    ]
+  },
   "spaceshare": {
     "overview": "SpaceShare connects B2B shippers with inter-province drivers who already have spare capacity on a planned trip. Three products — a driver mobile app, a company web app, and a shared API — built around one idea: drivers pick the packages on their route, no auto-matching.",
     "highlights": [

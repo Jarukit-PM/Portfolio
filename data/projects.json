@@ -1,5 +1,27 @@
 [
   {
+    "id": 8,
+    "slug": "ticket-booking-system",
+    "title": "Cinema Ticket Booking System",
+    "stars": 5,
+    "image": "/images/project/TicketBookingSystem_cover.png",
+    "description": "Built a full-stack cinema ticket booking platform with real-time WebSocket seat maps, Redis-backed checkout holds, and digital QR tickets. Vue 3 SPA and Go (Gin) API with MongoDB, async email via asynq/Brevo, bilingual EN/TH UI, and Docker Compose deployment.",
+    "tags": [
+      "Vue 3",
+      "TypeScript",
+      "Tailwind CSS",
+      "Go",
+      "Gin",
+      "MongoDB",
+      "Redis",
+      "WebSocket",
+      "Docker"
+    ],
+    "link": "https://github.com/Jarukit-PM/TicketBookingSystem",
+    "github": "https://github.com/Jarukit-PM/TicketBookingSystem",
+    "demo": "https://youtu.be/bVDQ12Q24JM"
+  },
+  {
     "id": 7,
     "slug": "spaceshare",
     "title": "SpaceShare",
